@@ -83,6 +83,20 @@ public:
 			}
 		}
 	}
+	void deleteFirst()
+	{
+		if (size > 0)
+		{
+			DoublyNodeType<T>* toBeDeleted = head;
+			head = head->next;
+			delete toBeDeleted;
+			size--;
+			if (head == nullptr)
+			{
+				tail = nullptr;
+			}
+		}
+	}
 	void print()
 	{
 		DoublyNodeType<T>* current = head;
@@ -102,7 +116,10 @@ int main()
 	li->insertAtBeginning(7);
 	li->insertAtEnd(5);
 	li->insertExactlyAt(9, 2);
+	li->deleteFirst();
 	li->print();
+	cout << endl;
+	cout << "Size : " << li->size;
 
 	return 0;
 }
