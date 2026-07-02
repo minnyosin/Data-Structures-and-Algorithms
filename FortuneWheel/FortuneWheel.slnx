@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="FortuneWheel/FortuneWheel.vcxproj" />
+  <Project Path="FortuneWheel/FortuneWheel.vcxproj" Id="5a657276-13dd-461d-a0da-9f7561a594fc" />
 </Solution>

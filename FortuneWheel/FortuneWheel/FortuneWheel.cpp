@@ -44,12 +44,12 @@ public:
 	}
 	void DisplayNodes()
 	{
-		CircularNodeType<T>* current = tail->next;
+		CircularNodeType<T>* current = head;
 		do
 		{
 			cout << current->info << " ";
 			current = current->next;
-		} while (current != tail->next);
+		} while (current != head);
 	}
 	void VisitNodes(int rNum)
 	{
@@ -91,7 +91,12 @@ int main()
 	int rNum = spin(size);
 	cout << rNum << endl;
 	wheel->VisitNodes(rNum);
+	wheel->DisplayNodes();
+	cout << endl;
 	wheel->VisitNodes(3);
+	wheel->DisplayNodes();
+	cout << endl;
+	wheel->VisitNodes(13);
 	
 	return 0;
 }
