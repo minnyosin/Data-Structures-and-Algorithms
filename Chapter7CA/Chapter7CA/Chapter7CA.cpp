@@ -2,20 +2,110 @@
 
 using namespace std;
 
-class Stack
+
+class NodeType
+{
+public:
+	int info;
+	NodeType* next;
+};
+class LinkedListStack
+{
+public:
+	NodeType* head;
+	NodeType* tail;
+	int size;
+
+	LinkedListStack()
+	{
+		this->head = nullptr;
+		this->tail = nullptr;
+		this->size = 0;
+	}
+	~LinkedListStack()
+	{
+		NodeType* current = head;
+		while (head != nullptr)
+		{
+			current = current->next;
+			delete head;
+			head = current;
+		}
+	}
+
+	void push(int value)
+	{
+		NodeType* newNode = new NodeType();
+		newNode->info = value;
+		newNode->next = head;
+		head = newNode;
+		size++;
+		if (tail = nullptr)
+		{
+			tail = newNode;
+		}
+	}
+	void pop()
+	{
+		if (size > 0)
+		{
+			NodeType* toBeDeleted = new NodeType();
+			head = head->next;
+			delete toBeDeleted;
+			size--;
+			if (head == nullptr)
+			{
+				tail = nullptr;
+			}
+		}
+	}
+	void top()
+	{
+		cout << head->info << endl;
+	}
+	int getSize()
+	{
+		return size;
+	}
+	bool isEmpty()
+	{
+		return size == 0;
+	}
+	void Display()
+	{
+		if (!isEmpty())
+		{
+			for (int i = size-1; i >= 0; i--)
+			{
+				NodeType* current = head;
+				for (int j = 0; j < i; j++)
+				{
+					current = current->next;
+				}
+				cout << current->info << endl;
+			}
+		}
+		else
+		{
+			cout << "Empty Stack!";
+		}
+	}
+
+};
+class ArrayStack
 {
 	char* list;
 	int stackTop;
 	int maxStackSize;
 
 public:
-	Stack(int max)
+	ArrayStack(int max)
 	{
 		maxStackSize = max;
 		list = new char[max];
 		stackTop = -1;
 	}
-	~Stack()
+	~ArrayStack()
 	{
 		delete[] list;
 		maxStackSize = 0;
@@ -63,13 +153,27 @@ public:
 };
 int main()
 {
-	Stack* stack1 = new Stack(10);
+	ArrayStack* stack1 = new ArrayStack(10);
 	stack1->push('a');
 	stack1->push('b');
 	stack1->push('c');
 	stack1->pop();
 	stack1->top();
 	stack1->display();
+
+	delete stack1;
+
+	cout << endl;
+	LinkedListStack* l1 = new LinkedListStack();
+
+	l1->push(10);
+	l1->push(12);
+	l1->push(14);
+	l1->pop();
+	l1->top();
+	l1->Display();
+
+	delete l1;
 
 	return 0;
 }
