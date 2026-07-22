@@ -1,5 +1,5 @@
-#include "Player.h";
-#include "Challenge.h";
+#include "Player.h"
+#include "Challenge.h"
 #include "Encounters.h"
 #include "Display.h"
 #include "Validations.h"
@@ -30,7 +30,8 @@ int main()
 restartPhoneDistraction:
 	Player* student = new Player(playerName, playerLuck);
 	student->displayPlayerStats();
-	
+
+
 	cout << endl;
 	slowPrint("You are currently at week 1 of your semester..");
 	cout << endl;
@@ -56,6 +57,7 @@ restartPhoneDistraction:
 			char option;
 			cout << "Do you want to try again?(y/n) : ";
 			cin >> option;
+
 
 			if (option == 'y')
 			{

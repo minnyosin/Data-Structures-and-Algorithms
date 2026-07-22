@@ -143,13 +143,14 @@
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="Encounters.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Validations.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Challenge.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="Encounters.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Validations.h" />
   </ItemGroup>
