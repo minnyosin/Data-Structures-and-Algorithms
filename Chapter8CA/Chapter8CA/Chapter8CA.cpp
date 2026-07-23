@@ -1,7 +1,100 @@
 #include <iostream>
 
 using namespace std;
-class Queue
+
+template <class T>
+class NodeType
+{
+public:
+    T info;
+    NodeType<T>* next;
+};
+
+template <class T>
+class LinkedListQueue
+{
+public:
+    NodeType<T>* head;
+    NodeType<T>* tail;
+    int size = 0;
+
+    LinkedListQueue()
+    {
+        this->head = nullptr;
+        this->tail = nullptr;
+        this->size = 0;
+    }
+    ~LinkedListQueue()
+    {
+        
+        while (head != nullptr)
+        {
+            NodeType<T>* current = head;
+            head = head->next;
+            delete current;
+            
+        }
+        tail = nullptr;
+        size = 0;
+    }
+    void Enqueue(T value)
+    {
+        NodeType<T>* newNode = new NodeType<T>;
+        newNode->info = value;
+        newNode->next = nullptr;
+
+        if (head == nullptr)
+        {
+            head = tail = newNode;
+        }
+        else
+        {
+            tail->next = newNode;
+            tail = newNode;
+        }
+        size++;
+    }
+    void Dequeue()
+    {
+        if (size <= 0)
+        {
+            cout << "The Queue is Empty!" << endl;
+        }
+        else
+        {
+            NodeType<T>* toDelete = head;
+            head = head->next;
+            delete toDelete;
+            size--;
+            if (head == nullptr)
+            {
+                head = tail = nullptr;
+            }
+        }
+    }
+    bool isEmpty()
+    {
+        return size <= 0;
+    }
+    int getSize()
+    {
+        return size;
+    }
+    void Display()
+    {
+        if (size > 0)
+        {
+            NodeType<T>* current = head;
+            for (int i = 0; i < size; i++)
+            {
+                cout << current->info << endl;
+                current = current->next;
+            }
+        }
+    }
+};
+
+class ArrayQueue
 {
     char* list;
     int maxQueueSize;
@@ -9,7 +102,7 @@ class Queue
     int queueRear;
 
 public:
-    Queue(int maxSize)
+    ArrayQueue(int maxSize)
     {
         maxQueueSize = maxSize;
         queueFront = 0;
@@ -17,7 +110,7 @@ public:
         list = new char[maxQueueSize];
 
     }
-    ~Queue()
+    ~ArrayQueue()
     {
         delete[] list;
     }
@@ -38,6 +131,7 @@ public:
             return list[queueFront++];
 
         }
+        return NULL;
     }
     bool isEmpty()
     {
@@ -49,7 +143,7 @@ public:
     }
     void Display()
     {
-        if (queueRear > queueFront)
+        if (queueRear >= queueFront)
         {
             for (int i = queueFront; i <= queueRear; i++)
             {
@@ -65,7 +159,7 @@ void CA1()
 
     cout << "How many elements in a queue? : ";
     cin >> size;
-    Queue* queue1 = new Queue(size);
+    ArrayQueue* queue1 = new ArrayQueue(size);
     cout << "Adding elements to a queue... " << endl;
     for (int i = 0; i < size; i++)
     {
@@ -95,9 +189,28 @@ void CA1()
     
     delete queue1;
 }
+void CA2()
+{
+    LinkedListQueue<string>* TP = new LinkedListQueue<string>;
+    
+    TP->Enqueue("TP01");
+    TP->Enqueue("TP02");
+    TP->Enqueue("TP03");
+    TP->Dequeue();
+    TP->Enqueue("TP04");
+    TP->Enqueue("TP05");
+    TP->Dequeue();
+    TP->Enqueue("TP02");
+
+    TP->Display();
+    
+    delete TP;
+
+}
 int main()
 {
-    CA1();
+    //CA1();
+    CA2();
 
 
     return 0;
