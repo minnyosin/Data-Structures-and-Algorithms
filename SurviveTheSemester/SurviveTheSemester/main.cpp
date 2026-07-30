@@ -3,7 +3,9 @@
 #include "Encounters.h"
 #include "Display.h"
 #include "Validations.h"
+#include "exploration.h"
 #include <random>
+
 
 
 
@@ -45,11 +47,11 @@ restartPhoneDistraction:
 	{
 	case 1:
 		slowPrint("Congs!", 100);
-		break; // change later
+		weekTwoExploration(student);
 	
 	case 2:
 		slowPrint("You blamed yourself.");
-		break;
+		weekTwoExploration(student);
 	
 	case 3:
 		do

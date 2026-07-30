@@ -395,3 +395,289 @@ int procrastinationChallenge(Player* student) // may be I will use this encounte
 	delete procrastination;
 	return 2;
 }
+int attendingClassEncounter(Player* student)
+{
+	slowPrint("You decided to attend your class!");
+	cout << endl;
+
+	Challenge* difficultLecture = new Challenge("Difficult Lecture", 60, 6, 7);
+
+	difficultLecture->displayChallengeStats();
+
+	float knowledgeBeforeClass = student->knowledge;
+
+	while (
+		difficultLecture->challengeLevel > 0 &&
+		student->focus > 0 &&
+		difficultLecture->challengeTime > 0)
+	{
+		int option1;
+		bool isYourTurn = true;
+
+		PlayerStats playerBefore = student->tempStat();
+		ChallengeStats challengeBefore = difficultLecture->tempStat();
+
+		if (isYourTurn)
+		{
+			cout << endl;
+			cout << "1. Listen Carefully" << endl;
+			cout << "2. Take Detailed Notes" << endl;
+			cout << "3. Ask the Lecturer" << endl;
+			cout << "4. Open Inventory" << endl;
+			cout << "What would you do? : ";
+
+			cin >> option1;
+
+			if (!isInputValid())
+			{
+				continue;
+			}
+
+			switch (option1)
+			{
+			case 1:
+				if (student->energy < difficultLecture->pressure)
+				{
+					cout << endl;
+					slowPrint("You don't have enough energy to listen carefully!");
+
+					slowPrint("Try recovering some energy first.");
+
+					continue;
+				}
+
+				cout << endl;
+				slowPrint("You focused on what the lecturer was explaining.");
+
+				slowPrint("You understood some parts of the difficult topic.");
+
+				slowPrint(
+					"You gained knowledge, but used some energy.");
+
+				cout << endl;
+
+				student->energy -= difficultLecture->pressure;
+
+				student->knowledge += 2;
+
+				difficultLecture->challengeLevel -= (((student->energy / 100.0) * (student->motivation * student->focus * 0.01))+(student->knowledge / 10.0));
+
+				isYourTurn = false;
+				break;
+
+			case 2:
+				if (student->focus < 5)
+				{
+					cout << endl;
+					slowPrint("You don't have enough focus to take notes!");
+
+					continue;
+				}
+
+				cout << endl;
+				slowPrint("You started taking detailed notes.");
+
+				slowPrint("Writing everything helped you understand the topic.");
+
+				slowPrint("However, taking notes used some of your focus.");
+
+				cout << endl;
+
+				student->focus -= 5;
+				student->knowledge += 2;
+
+				difficultLecture->challengeLevel -= 12;
+
+				isYourTurn = false;
+				break;
+
+			case 3:
+				if (student->motivation < 1)
+				{
+					cout << endl;
+					slowPrint("You don't have enough motivation to ask a question!");
+
+					continue;
+				}
+
+				cout << endl;
+				slowPrint("You raised your hand and asked the lecturer a question.");
+
+				slowPrint("The lecturer explained the difficult topic again.");
+
+				slowPrint("You gained a lot of knowledge from the explanation.");
+
+				cout << endl;
+
+				student->motivation -= 1;
+				student->knowledge += 3;
+
+				difficultLecture->challengeLevel -= 18;
+
+				slowPrint("You were too busy speaking with the lecturer.");
+
+				slowPrint("Nothing distracted you during this round!");
+
+				break;
+
+			case 4:
+				student->openInventory();
+
+				continue;
+
+			default:
+				cout << endl;
+				cout << "Invalid Input! Try Putting (1 to 4)"<< endl;
+
+				continue;
+			}
+		}
+
+		if (difficultLecture->isDead())
+		{
+			--difficultLecture->challengeTime;
+
+			slowPrint("You successfully finished attending the class!");
+
+			slowPrint("You understood the difficult lecture.");
+
+			slowPrint("You kept all the knowledge you gained during class!");
+
+			cout << endl;
+
+			student->checkStats();
+
+			cout << "==== Class Result ====" << endl;
+			student->displayPlayerStats();
+
+			cout << endl;
+			difficultLecture->displayChallengeStats();
+
+			delete difficultLecture;
+			return 1;
+		}
+
+		if (!isYourTurn)
+		{
+			slowPrint("But suddenly...");
+			cout << endl;
+
+			int randomAttack = randomEnemyAttack();
+
+			if (randomAttack == 1)
+			{
+				slowPrint("The lecturer started explaining a very difficult part!");
+
+				slowPrint("You became confused and lost some focus.");
+
+				student->focus -= 6;
+			}
+			else if (randomAttack == 2)
+			{
+				slowPrint(
+					"A notification appeared on your phone!"
+				);
+
+				slowPrint(
+					"You checked your phone and missed part of the explanation."
+				);
+
+				student->focus -= 5;
+			}
+			else if (randomAttack == 3)
+			{
+				slowPrint(
+					"Your friend started speaking to you during class."
+				);
+
+				slowPrint(
+					"You tried to listen to your friend and the lecturer together."
+				);
+
+				slowPrint(
+					"You lost some focus and energy."
+				);
+
+				student->focus -= 4;
+				student->energy -= 3;
+			}
+			else
+			{
+				slowPrint(
+					"The lecturer started explaining the topic too quickly!"
+				);
+
+				slowPrint(
+					"You struggled to follow the explanation."
+				);
+
+				student->energy -= 6;
+				student->motivation -= 1;
+			}
+
+			isYourTurn = true;
+		}
+
+		cout << endl;
+		--difficultLecture->challengeTime;
+
+		if (difficultLecture->isTimeout())
+		{
+			slowPrint("The class has ended!");
+			slowPrint("You could not understand the difficult lecture.");
+
+			slowPrint("You lost all the knowledge gained during this class."
+			);
+
+			cout << endl;
+
+			student->knowledge = knowledgeBeforeClass;
+
+			student->motivation -= 2;
+			student->focus -= 5;
+
+			student->checkStats();
+
+			cout << "==== Class Result ====" << endl;
+			student->displayPlayerStats();
+
+			cout << endl;
+			difficultLecture->displayChallengeStats();
+
+			if (student->isDead())
+			{
+				delete difficultLecture;
+				return 3;
+			}
+
+			delete difficultLecture;
+			return 2;
+		}
+
+		student->checkStats();
+
+		cout << "===== Round Result =====" << endl;
+
+		cout << endl;
+		student->displayStatChanges(playerBefore);
+
+		cout << endl;
+		difficultLecture->displayStatChanges(challengeBefore);
+
+		cout << endl;
+		cout << "=========================" << endl;
+
+		if (student->isDead())
+		{
+			student->knowledge = knowledgeBeforeClass;
+
+			delete difficultLecture;
+			return 3;
+		}
+	}
+
+	student->knowledge = knowledgeBeforeClass;
+
+	delete difficultLecture;
+	return 2;
+}
