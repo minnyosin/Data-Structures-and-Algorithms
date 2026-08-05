@@ -22,8 +22,8 @@ void campusShop(Player* student)
 	int option = 0;
 	while (option != 5) 
 	{
-		cout << endl << "===== APU Bila Bila =====" << endl;
-		cout << "Money : RM " << student->money << endl;
+		cout << endl << "===== APU Bila Bila =====" << endl << endl;
+		cout << "Money : RM " << student->money << endl << endl;
 		cout << "1. Coffee - RM 5" << endl;
 		cout << "2. Sandwich - RM 6" << endl;
 		cout << "3. Chocolate - Rm 3" << endl;
@@ -64,8 +64,8 @@ void downtownShop(Player* student)
 	int option = 0;
 	while (option != 5)
 	{
-		cout << endl << "===== KLCC Pavillion =====" << endl;
-		cout << "Money : RM " << student->money << endl;
+		cout << endl << "===== KLCC Pavillion =====" << endl << endl;
+		cout << "Money : RM " << student->money << endl << endl;
 		cout << "1. Energy Drink - RM 8" << endl;
 		cout << "2. Study Notes - RM 12" << endl;
 		cout << "3. Instant Noodles - Rm 4" << endl;

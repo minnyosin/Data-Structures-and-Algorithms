@@ -70,6 +70,7 @@ public:
 			current = current->next;
 		}
 		insertAtEnd(item, quantity);
+		cout << endl;
 		cout << item.name << " was added to your inventory!" << endl;
 	}
 	InventoryNode* getItemAt(int index)

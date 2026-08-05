@@ -12,6 +12,14 @@ int randomEnemyAttack()
 	uniform_int_distribution<int> distrib(0, 3);
 	return distrib(gen) + 1;
 }
+int randomLuckCheck()
+{
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_int_distribution<int> distrib(1, 20);
+
+	return distrib(gen);
+}
 
 int phoneDistractionChallenge(Player* student)
 {
@@ -103,6 +111,7 @@ int phoneDistractionChallenge(Player* student)
 			student->displayPlayerStats();
 			cout << endl;
 			phoneDistraction->displayChallengeStats();
+			delete phoneDistraction;
 			return 1;
 			break;
 		}
@@ -155,11 +164,11 @@ int phoneDistractionChallenge(Player* student)
 			phoneDistraction->displayChallengeStats();
 			if (student->isDead())
 			{
+				delete phoneDistraction;
 				return 3;
-				break;
 			}
+			delete phoneDistraction;
 			return 2;
-			break;
 		}
 
 		student->checkStats();
@@ -176,20 +185,20 @@ int phoneDistractionChallenge(Player* student)
 
 		if (student->isDead())
 		{
+			delete phoneDistraction;
 			return 3;
-			break;
 		}
 
 	}
 	delete phoneDistraction;
+	return 2;
 }
 int procrastinationChallenge(Player* student) // may be I will use this encounter later in the game :)
 {
 	slowPrint("You encountered Procrastination!");
 	cout << endl;
 
-	Challenge* procrastination =
-		new Challenge("Procrastination", 50, 6, 7);
+	Challenge* procrastination = new Challenge("Procrastination", 50, 6, 7);
 
 	procrastination->displayChallengeStats();
 
@@ -397,6 +406,7 @@ int procrastinationChallenge(Player* student) // may be I will use this encounte
 }
 int attendingClassEncounter(Player* student)
 {
+	cout << endl;
 	slowPrint("You decided to attend your class!");
 	cout << endl;
 
@@ -537,6 +547,7 @@ int attendingClassEncounter(Player* student)
 		{
 			--difficultLecture->challengeTime;
 
+			cout << endl;
 			slowPrint("You successfully finished attending the class!");
 
 			slowPrint("You understood the difficult lecture.");
@@ -679,5 +690,624 @@ int attendingClassEncounter(Player* student)
 	student->knowledge = knowledgeBeforeClass;
 
 	delete difficultLecture;
+	return 2;
+}
+
+int surpriseQuizChallenge(Player* student)
+{
+	cout << endl;
+	slowPrint("You encountered a Surprise Quiz!");
+	cout << endl;
+
+	Challenge* surpriseQuiz = new Challenge("Surprise Quiz", 70, 8, 6);
+
+	surpriseQuiz->displayChallengeStats();
+
+	while (
+		surpriseQuiz->challengeLevel > 0 &&
+		student->focus > 0 &&
+		surpriseQuiz->challengeTime > 0)
+	{
+		int option1;
+		bool isYourTurn = true;
+
+		PlayerStats playerBefore = student->tempStat();
+
+		ChallengeStats challengeBefore = surpriseQuiz->tempStat();
+
+		cout << endl;
+		cout << "1. Answer Using Your Knowledge" << endl;
+		cout << "2. Think Carefully" << endl;
+		cout << "3. Make a Lucky Guess" << endl;
+		cout << "4. Open Inventory" << endl;
+		cout << "What would you do? : ";
+
+		cin >> option1;
+
+		if (!isInputValid())
+		{
+			continue;
+		}
+
+		switch (option1)
+		{
+		case 1:
+			if (student->energy < surpriseQuiz->pressure)
+			{
+				cout << endl;
+				slowPrint("You don't have enough energy to answer the question!");
+
+				slowPrint("Try recovering some energy first.");
+
+				continue;
+			}
+
+			cout << endl;
+			slowPrint("You used your knowledge to answer the question.");
+
+			slowPrint("You remembered something from your previous classes.");
+
+			cout << endl;
+
+			student->energy -= surpriseQuiz->pressure;
+
+			surpriseQuiz->challengeLevel -= (student->knowledge / 2.0);
+
+			isYourTurn = false;
+			break;
+
+		case 2:
+			if (student->focus < 6)
+			{
+				cout << endl;
+				slowPrint("You don't have enough focus to think carefully!");
+
+				continue;
+			}
+
+			cout << endl;
+			slowPrint("You carefully examined every possible answer.");
+
+			slowPrint("You found an answer that made the most sense.");
+
+			cout << endl;
+
+			student->focus -= 6;
+			surpriseQuiz->challengeLevel -= 15;
+
+			isYourTurn = false;
+			break;
+
+		case 3:
+		{
+			cout << endl;
+			slowPrint("You could not remember the answer.");
+
+			slowPrint("You decided to make a lucky guess!");
+
+			cout << endl;
+
+			int luckResult = randomLuckCheck();
+
+			cout << "Your Luck : " << student->luck << endl;
+
+			cout << "Luck Roll : " << luckResult << endl;
+
+			if (luckResult <= student->luck)
+			{
+				cout << endl;
+				slowPrint("Your lucky guess was correct!");
+
+				surpriseQuiz->challengeLevel -= 25;
+			}
+			else
+			{
+				cout << endl;
+				slowPrint("Your lucky guess was completely wrong!");
+
+				slowPrint("You began doubting your other answers.");
+
+				student->focus -= 8;
+				student->motivation -= 1;
+			}
+
+			isYourTurn = false;
+			break;
+		}
+
+		case 4:
+			cout << endl;
+			student->openInventory();
+			student->checkStats();
+
+			continue;
+
+		default:
+			cout << endl;
+			cout << "Invalid Input! Try Putting (1 to 4)"<< endl;
+
+			continue;
+		}
+
+		if (surpriseQuiz->isDead())
+		{
+			--surpriseQuiz->challengeTime;
+
+			cout << endl;
+			slowPrint("You successfully completed the Surprise Quiz!");
+
+			slowPrint("You felt more confident about your studies.");
+
+			student->motivation += 2;
+			student->receiveMoney(10);
+			student->checkStats();
+
+			cout << endl;
+			cout << "==== Quiz Result ====" << endl;
+
+			student->displayPlayerStats();
+
+			cout << endl;
+			surpriseQuiz->displayChallengeStats();
+
+			delete surpriseQuiz;
+			return 1;
+		}
+
+		if (!isYourTurn)
+		{
+			cout << endl;
+			slowPrint("But suddenly...");
+			cout << endl;
+
+			int randomAttack = randomEnemyAttack();
+
+			if (randomAttack == 1)
+			{
+				slowPrint("The question contained very confusing words.");
+
+				slowPrint("You started doubting your answer.");
+
+				student->focus -= 6;
+			}
+			else if (randomAttack == 2)
+			{
+				slowPrint("Another student disturb you by keep asking for answers");
+
+				slowPrint("The lecturer noticed that and warned both of you!");
+
+				student->motivation -= 2;
+				student->focus -= 2;
+			}
+			else if (randomAttack == 3)
+			{
+				slowPrint("You suddenly forgot an important formula.");
+
+				slowPrint("You struggled to remember it.");
+
+				student->focus -= 7;
+			}
+			else
+			{
+				slowPrint("Another student submitted the quiz early.");
+
+				slowPrint("You started rushing through your answers.");
+
+				student->energy -= 5;
+			}
+
+			isYourTurn = true;
+		}
+
+		cout << endl;
+		--surpriseQuiz->challengeTime;
+
+		student->checkStats();
+
+		if (surpriseQuiz->isTimeout())
+		{
+			cout << endl;
+			slowPrint("The quiz time has ended!");
+			slowPrint("You could not complete all the questions.");
+
+			student->motivation -= 2;
+			student->focus -= 5;
+			student->checkStats();
+
+			cout << endl;
+			cout << "==== Quiz Result ====" << endl;
+
+			student->displayPlayerStats();
+
+			cout << endl;
+			surpriseQuiz->displayChallengeStats();
+
+			if (student->isDead())
+			{
+				delete surpriseQuiz;
+				return 3;
+			}
+
+			delete surpriseQuiz;
+			return 2;
+		}
+
+		cout << "===== Round Result =====" << endl;
+
+		cout << endl;
+		student->displayStatChanges(playerBefore);
+
+		cout << endl;
+		surpriseQuiz->displayStatChanges(challengeBefore);
+
+		cout << endl;
+		cout << "=========================" << endl;
+
+		if (student->isDead())
+		{
+			delete surpriseQuiz;
+			return 3;
+		}
+	}
+
+	delete surpriseQuiz;
+	return 2;
+}
+
+int groupAssignmentChallenge(Player* student)
+{
+	cout << endl;
+	slowPrint("You encountered a Group Assignment Crisis!");
+	Challenge* groupAssignment = new Challenge("Group Assignment Crisis", 110, 10, 6);
+	
+	int assignmentWeek = 7;
+
+	cout << endl;
+	cout << "===== WEEK 7 =====" << endl;
+	cout << endl;
+
+	slowPrint("Your lecturer announced the Group Assignment.");
+
+	slowPrint("Your group has until Week 12 to complete it.");
+
+	cout << endl;
+
+	groupAssignment->displayChallengeStats();
+
+	while (
+		groupAssignment->challengeLevel > 0 &&
+		student->focus > 0 &&
+		groupAssignment->challengeTime > 0)
+	{
+		int option1;
+		bool isYourTurn = true;
+
+		PlayerStats playerBefore = student->tempStat();
+
+		ChallengeStats challengeBefore = groupAssignment->tempStat();
+
+		cout << endl;
+		cout << "1. Work on Your Assigned Part" << endl;
+		cout << "2. Communicate With Your Teammates" << endl;
+		cout << "3. Cover a Missing Teammate's Work" << endl;
+		cout << "4. Trust Your Teammate" << endl;
+		cout << "5. Open Inventory" << endl;
+		cout << "What would you do? : ";
+
+		cin >> option1;
+
+		if (!isInputValid())
+		{
+			continue;
+		}
+
+		switch (option1)
+		{
+		case 1:
+			if (student->energy < groupAssignment->pressure)
+			{
+				cout << endl;
+				slowPrint("You don't have enough energy to complete your part!");
+
+				slowPrint("Try recovering some energy first.");
+
+				continue;
+			}
+
+			cout << endl;
+			slowPrint("You continued working on your assigned part.");
+
+			slowPrint("You gained some knowledge from doing the work.");
+
+			cout << endl;
+
+			student->energy -= groupAssignment->pressure;
+
+			student->knowledge += 1;
+
+			groupAssignment->challengeLevel -= (((student->energy / 100.0) * (student->motivation * student->focus * 0.01)) + (student->knowledge / 10.0));
+
+			isYourTurn = false;
+			break;
+
+		case 2:
+			if (student->focus < 5)
+			{
+				cout << endl;
+				slowPrint("You don't have enough focus to communicate properly!");
+
+				continue;
+			}
+
+			cout << endl;
+			slowPrint("You organised a meeting with your teammates.");
+
+			slowPrint("Everyone now understands their responsibility.");
+
+			slowPrint("Good communication prevented a problem this round!");
+
+			cout << endl;
+
+			student->focus -= 5;
+			student->motivation += 1;
+
+			groupAssignment->challengeLevel -= 18;
+
+			break;
+
+		case 3:
+			if (student->energy < 20)
+			{
+				cout << endl;
+				slowPrint("You need at least 20 Energy to do the extra work!");
+
+				slowPrint("Try recovering some energy first.");
+
+				continue;
+			}
+
+			cout << endl;
+			slowPrint("One teammate did not complete their part.");
+
+			slowPrint("You decided to complete their work yourself.");
+
+			slowPrint("You made a lot of progress, but became exhausted.");
+
+			cout << endl;
+
+			student->energy -= 20;
+			student->motivation -= 2;
+
+			groupAssignment->challengeLevel -= 30;
+
+			isYourTurn = false;
+			break;
+
+		case 4:
+		{
+			cout << endl;
+			slowPrint("You trusted your teammate to complete an important section.");
+
+			cout << endl;
+
+			int luckResult = randomLuckCheck();
+
+			cout << "Your Luck : " << student->luck << endl;
+
+			cout << "Luck Roll : " << luckResult << endl;
+
+			if (luckResult <= student->luck)
+			{
+				cout << endl;
+				slowPrint("Your teammate completed their part perfectly!");
+
+				slowPrint("The group made a lot of progress.");
+
+				groupAssignment->challengeLevel -= 25;
+			}
+			else
+			{
+				cout << endl;
+				slowPrint("Your teammate submitted incomplete work!");
+
+				slowPrint("You now have even more work to complete.");
+
+				student->focus -= 7;
+				groupAssignment->challengeLevel += 5;
+			}
+
+			isYourTurn = false;
+			break;
+		}
+
+		case 5:
+			cout << endl;
+			student->openInventory();
+			student->checkStats();
+
+			continue;
+
+		default:
+			cout << endl;
+			cout << "Invalid Input! Try Putting (1 to 5)"<< endl;
+
+			continue;
+		}
+
+		if (groupAssignment->isDead())
+		{
+			--groupAssignment->challengeTime;
+
+			cout << endl;
+			slowPrint("You completed the Group Assignment!");
+			cout << "You completed it during week " << assignmentWeek << "!" << endl;
+
+			slowPrint("Your team successfully submitted the project.");
+
+			slowPrint("You gained valuable knowledge from the experience.");
+
+			cout << endl;
+
+			student->knowledge += 5;
+			student->motivation += 2;
+			student->receiveMoney(20);
+
+			student->checkStats();
+
+			cout << endl;
+			cout << "==== Assignment Result ===="<< endl;
+
+			student->displayPlayerStats();
+
+			cout << endl;
+			groupAssignment->displayChallengeStats();
+
+			delete groupAssignment;
+			return 1;
+		}
+
+		bool movedToNextWeek = false;
+
+		if (assignmentWeek < 12)
+		{
+			assignmentWeek++;
+			movedToNextWeek = true;
+
+			cout << endl;
+			slowPrint("Another week passed...");
+
+			cout << endl;
+			cout << "===== WEEK " << assignmentWeek << " =====" << endl << endl;
+		}
+		if (movedToNextWeek)
+		{
+			if (!isYourTurn)
+			{
+				if (assignmentWeek == 8)
+				{
+					slowPrint("One of your teammates stopped replying to the group messages.");
+
+					slowPrint("They still had not started their assigned section.");
+
+					slowPrint("You began losing motivation.");
+
+					student->motivation -= 3;
+				}
+				else if (assignmentWeek == 9)
+				{
+					slowPrint("Two teammates disagreed about the direction of the project.");
+
+					slowPrint("The group spent too much time arguing instead of working.");
+
+					slowPrint("The disagreement made it difficult for you to focus.");
+
+					student->focus -= 6;
+				}
+				else if (assignmentWeek == 10)
+				{
+					slowPrint("One teammate misunderstood the section assigned to them.");
+
+					slowPrint("Their work did not match the assignment requirements.");
+
+					slowPrint("You used some of your energy helping them correct it.");
+
+					student->energy -= 7;
+				}
+				else if (assignmentWeek == 11)
+				{
+					slowPrint("Your group showed the unfinished project to the lecturer.");
+
+					slowPrint("The lecturer said that several important details were missing.");
+
+					slowPrint("The additional corrections affected your focus and motivation.");
+
+					student->focus -= 4;
+					student->motivation -= 1;
+				}
+				else if (assignmentWeek == 12)
+				{
+					slowPrint("One teammate suggested several last-minute changes.");
+
+					slowPrint("The submission deadline was now extremely close.");
+
+					slowPrint("The last-minute work affected your energy and focus.");
+
+					student->energy -= 5;
+					student->focus -= 4;
+				}
+
+				isYourTurn = true;
+			}
+			else
+			{
+				cout << endl;
+				slowPrint("Because you communicated with your teammates early, the group solved this week's problem before it became serious.");
+			}
+		}
+		else
+		{
+			cout << endl;
+			slowPrint("The final submission deadline is tonight.");
+
+			slowPrint("This is your last chance to finish the assignment.");
+		}
+
+		cout << endl;
+		--groupAssignment->challengeTime;
+
+		student->checkStats();
+
+		if (groupAssignment->isTimeout())
+		{
+			cout << endl;
+			slowPrint("The assignment deadline has arrived!");
+
+			slowPrint("Your group failed to complete the assignment.");
+
+			slowPrint("The unfinished assignment affected your motivation and focus.");
+
+			cout << endl;
+
+			student->motivation -= 4;
+			student->focus -= 8;
+
+			student->checkStats();
+
+			cout << "==== Assignment Result ===="<< endl;
+			
+			student->displayPlayerStats();
+
+			cout << endl;
+			groupAssignment->displayChallengeStats();
+
+			if (student->isDead())
+			{
+				delete groupAssignment;
+				return 3;
+			}
+
+			delete groupAssignment;
+			return 2;
+		}
+
+		cout << "===== Round Result =====" << endl;
+
+		cout << endl;
+		student->displayStatChanges(playerBefore);
+
+		cout << endl;
+		groupAssignment->displayStatChanges(challengeBefore);
+
+		cout << endl;
+		cout << "=========================" << endl;
+	
+		if (student->isDead())
+		{
+			delete groupAssignment;
+			return 3;
+		}
+	}
+
+	delete groupAssignment;
 	return 2;
 }

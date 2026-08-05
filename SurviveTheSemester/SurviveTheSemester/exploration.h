@@ -3,4 +3,5 @@
 
 int randomExplorationEvent();
 
-void weekTwoExploration(Player* student);
+int weekTwoExploration(Player* student);
+int weekSixExploration(Player* student);

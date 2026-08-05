@@ -160,6 +160,7 @@ public:
 		}
 		PlayerStats before = tempStat();
 		Item usedItem = selected->item;
+		cout << endl;
 		slowPrint("You used " + usedItem.name + "!");
 
 		focus += usedItem.focusRegen;
