@@ -182,6 +182,7 @@ public:
 	{
 		if (inventory.isEmpty())
 		{
+			cout << endl;
 			slowPrint("Your inventory is empty");
 			return false;
 		}

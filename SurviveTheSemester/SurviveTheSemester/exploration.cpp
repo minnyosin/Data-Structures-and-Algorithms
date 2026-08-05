@@ -26,7 +26,7 @@ void weekTwoExploration(Player* student)
 	bool missedClass = false;
 	bool exploredCampus = false;
 	bool exploredDowntown = false;
-	bool workedPartTime = false;
+	bool searchedPartTime = false;
 
 	PlayerStats playerBefore = student->tempStat();
 
@@ -96,7 +96,6 @@ void weekTwoExploration(Player* student)
 				cout << "1. Attend Class" << endl;
 				cout << "2. Explore the Campus" << endl;
 				cout << "3. Visit the APU Bila Bila" << endl;
-				cout << "";
 				cout << "4. Go to Downtown" << endl;
 				cout << "5. Go Home" << endl;
 				cout << "What would you like to do? : ";
@@ -118,7 +117,7 @@ void weekTwoExploration(Player* student)
 					}
 					if (missedClass)
 					{
-						cout << "endl";
+						cout << endl;
 						slowPrint("You arrived too late to attend the class.");
 						slowPrint("The class has already finished.");
 						break;
@@ -149,6 +148,8 @@ void weekTwoExploration(Player* student)
 
 				case 2:
 				{
+					PlayerStats playerBefore = student->tempStat();
+					cout << endl;
 					if (exploredCampus)
 					{
 						cout << endl;
@@ -180,7 +181,8 @@ void weekTwoExploration(Player* student)
 						student->motivation += 3;
 						student->energy -= 5;
 					}
-
+					cout << endl;
+					student->displayStatChanges(playerBefore);
 					exploredCampus = true;
 					break;
 				}
@@ -198,13 +200,22 @@ void weekTwoExploration(Player* student)
 				case 4:
 				{
 					cout << endl;
-					if (!attendedClass)
+					if (!attendedClass && missedClass)
+					{
+						slowPrint("You took the Train to KLCC.");
+					}
+					else if (!attendedClass)
 					{
 						slowPrint("You left APU before attending your class.");
 						slowPrint("You will not be able to attend it later.");
+						slowPrint("You took the Train to KLCC.");
 						missedClass = true;
 					}
-					slowPrint("You took the Train to KLCC.");
+					else
+					{
+						slowPrint("You took the Train to KLCC.");
+					}
+					
 					currentLocation = 2;
 					break;
 				}	
@@ -238,10 +249,207 @@ void weekTwoExploration(Player* student)
 			}
 			else if (currentLocation == 2)
 			{
+				cout << endl;
+				cout << "===== KLCC =====" << endl;
+				cout << endl;
 
+				cout << "1. Visit the Downtown Store" << endl;
+				cout << "2. Search for a part-time job" << endl;
+				cout << "3. Explore Downtown" << endl;
+				cout << "4. Go to APU" << endl;
+				cout << "5. Go Home" << endl;
+				cout << "What would you like to do? : ";
+
+				cin >> option;
+
+				if (!isInputValid())
+				{
+					continue;
+				}
+
+				switch (option)
+				{
+				case 1:
+				{
+					cout << endl;
+					slowPrint(
+						"You decided to visit the Downtown Store."
+					);
+
+					cout << endl;
+
+					downtownShop(student);
+					break;
+				}
+				case 2:
+				{
+					PlayerStats playerBefore = student->tempStat();
+					if (searchedPartTime)
+					{
+						cout << endl;
+						slowPrint(
+							"You already got a job"
+						);
+
+						break;
+					}
+
+					cout << endl;
+					slowPrint(
+						"You found a cafe looking for part-time workers."
+					);
+
+					slowPrint(
+						"You decided to apply for the job"
+					);
+					slowPrint(
+						"You received RM 15 for working for the first time!"
+					);
+					slowPrint(
+						"You will also receive RM 15 everytime you come to KLCC and decide to work, with the cost of your energy"
+					);
+
+
+					cout << endl;
+					student->receiveMoney(15);
+					student->energy -= 15;
+					student->motivation -= 1;
+					student->displayStatChanges(playerBefore);
+
+					searchedPartTime = true;
+					break;
+				}
+				case 3:
+				{
+					PlayerStats playerBefore = student->tempStat();
+					if (exploredDowntown)
+					{
+						cout << endl;
+						slowPrint(
+							"You have already explored Downtown today."
+						);
+
+						break;
+					}
+
+					cout << endl;
+					slowPrint(
+						"You decided to explore around Downtown."
+					);
+
+					cout << endl;
+
+					int randomEvent =
+						randomExplorationEvent();
+
+					if (randomEvent == 1)
+					{
+						slowPrint(
+							"You found a street performer."
+						);
+
+						slowPrint(
+							"The performance improved your mood."
+						);
+
+						student->motivation += 3;
+					}
+					else if (randomEvent == 2)
+					{
+						slowPrint(
+							"You helped someone carry their shopping bags."
+						);
+
+						slowPrint(
+							"They gave you RM5 as thanks."
+						);
+
+						student->receiveMoney(5);
+						student->energy -= 3;
+					}
+					else if (randomEvent == 3)
+					{
+						slowPrint(
+							"You became lost while exploring Downtown."
+						);
+
+						slowPrint(
+							"You walked for an hour before finding your way."
+						);
+
+						student->energy -= 10;
+						student->focus -= 2;
+					}
+					else
+					{
+						slowPrint(
+							"You met one of your classmates."
+						);
+
+						slowPrint(
+							"Your classmate shared today's lecture notes."
+						);
+
+						student->knowledge += 2;
+						student->motivation += 1;
+					}
+					student->displayStatChanges(playerBefore);
+					exploredDowntown = true;
+					break;
+				}
+
+				case 4:
+				{
+					cout << endl;
+					slowPrint(
+						"You decided to travel to APU."
+					);
+
+					if (missedClass)
+					{
+						slowPrint(
+							"Today's class has already finished."
+						);
+
+						slowPrint(
+							"You can still explore the campus and visit the store."
+						);
+					}
+
+					currentLocation = 1;
+					break;
+
+				case 5:
+					cout << endl;
+					slowPrint(
+						"You decided to return home from Downtown."
+					);
+
+					explorationFinished = true;
+					break;
+				}
+				default:
+				{
+					cout << endl;
+					cout << "Invalid Input! Try Putting (1 to 5)"
+						<< endl;
+
+					continue;
+				}
+				}
 			}
 
-		}
+			student->checkStats();
 
+			if (!explorationFinished && student->isDead())
+			{
+				explorationFinished = true;
+			}
+		}
+		student->checkStats();
+		cout << endl;
+		student->displayStatChanges(playerBefore);
+		cout << "========================" << endl;
 	}
+
 }

@@ -83,7 +83,7 @@ void downtownShop(Player* student)
 		}
 		else if (option == 4)
 		{
-			student->inventory.displayInventory();
+			student->openInventory();
 		}
 		else if (option != 5)
 		{

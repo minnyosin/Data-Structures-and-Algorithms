@@ -46,14 +46,29 @@ restartPhoneDistraction:
 	switch (playerWin)
 	{
 	case 1:
+	{
 		slowPrint("Congs!", 100);
 		weekTwoExploration(student);
-	
+
+		if (!student->isDead())
+		{
+			cout << endl;
+			cout << "Proceed to week 6" << endl;
+		}
+
+	}
 	case 2:
+	{
 		slowPrint("You blamed yourself.");
 		weekTwoExploration(student);
-	
+		if (!student->isDead())
+		{
+			cout << endl;
+			cout << "Proceed to week 6" << endl;
+		}
+	}
 	case 3:
+	{
 		do
 		{
 			char option;
@@ -78,6 +93,7 @@ restartPhoneDistraction:
 				continue;
 			}
 		} while (isInputValid());
+	}
 	}
 	delete student;
 	return 0;
