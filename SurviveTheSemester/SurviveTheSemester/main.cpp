@@ -6,6 +6,7 @@
 #include "Exploration.h"
 #include <iostream>
 #include <random>
+#include "Ascii.h"
 
 using namespace std;
 
@@ -124,6 +125,7 @@ int playWeekSixToTwelve(Player* student)
 
 int main()
 {
+	title();
 	slowPrint("Welcome to APU!");
 	slowPrint("You are challenged to finish the semester");
 
