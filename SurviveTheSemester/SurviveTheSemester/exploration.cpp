@@ -379,6 +379,7 @@ int weekTwoExploration(Player* student)
 
 
 					cout << endl;
+					student->hasPartTimeJob = true;
 					student->receiveMoney(15);
 					student->energy -= 15;
 					student->motivation -= 1;
@@ -773,9 +774,13 @@ int weekSixExploration(Player* student)
 			{
 			case 1:
 			{
-				PlayerStats activityBefore =
-					student->tempStat();
-
+				PlayerStats activityBefore = student->tempStat();
+				if (!student->hasPartTimeJob)
+				{
+					cout << endl;
+					slowPrint("You do not have a part-time job!");
+					break;
+				}
 				if (workedPartTime)
 				{
 					cout << endl;

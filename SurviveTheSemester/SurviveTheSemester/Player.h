@@ -28,6 +28,7 @@ public:
 	float luck;
 	int money;
 	InventoryLinkedList inventory;
+	bool hasPartTimeJob;
 
 	Player(string name, int luck)
 	{
@@ -38,6 +39,7 @@ public:
 		this->motivation = 7;
 		this->luck = luck;
 		this->money = 30;
+		this->hasPartTimeJob = false;
 	}
 	void checkStats()
 	{
