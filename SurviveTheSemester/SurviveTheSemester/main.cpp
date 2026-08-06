@@ -333,7 +333,57 @@ int main()
 // week 13
 
 	cout << endl;
-	cout << "===== WEEK 13 =====" << endl;
+	
+	Player* weekThirteenCheckpoint = new Player(playerName, playerLuck);
+
+	copyPlayerData(student, weekThirteenCheckpoint);
+
+	bool weekThirteenFinished = false;
+
+	while (!weekThirteenFinished)
+	{
+		int weekThirteenResult = weekThirteenExploration(student);
+
+		if (weekThirteenResult == 1)
+		{
+			cout << endl;
+			slowPrint("Another week passed just like that...");
+
+			weekThirteenFinished = true;
+		}
+		else if (weekThirteenResult == 3)
+		{
+			cout << endl;
+			slowPrint("You could not survive Week 13");
+
+			if (askRetryCurrentWeek())
+			{
+				copyPlayerData(weekThirteenCheckpoint, student);
+
+				cout << endl;
+				slowPrint("Restarting from Week 13...");
+			}
+			else
+			{
+				delete weekThirteenCheckpoint;
+				delete student;
+
+				return 0;
+			}
+		}
+		else
+		{
+			cout << endl;
+			cout << "Unknown week 13 result!" << endl;
+
+			delete weekThirteenCheckpoint;
+			delete student;
+
+			return 0;
+		}
+	}
+
+	delete weekThirteenCheckpoint;
 
 	// will add week 13 - 15 here, most of the code will be the same style, make a copy, go through the week, check for three condition, do the same as before. 
 	// only one thing will be different, for week 12 you will have 2 week of studying, like free exploration. after that, final exam come. 

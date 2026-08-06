@@ -5,3 +5,4 @@ int randomExplorationEvent();
 
 int weekTwoExploration(Player* student);
 int weekSixExploration(Player* student);
+int weekThirteenExploration(Player* student);

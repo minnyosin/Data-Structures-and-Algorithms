@@ -924,3 +924,367 @@ int weekSixExploration(Player* student)
 
 	return 1; 
 }
+int weekThirteenExploration(Player* student)
+{
+	int option;
+	int currentLocation = 1;
+	int currentWeek = 13;
+
+	bool explorationFinished = false;
+	bool studiedLibrary = false;
+	bool studiedWithClassmates = false; 
+	bool workedPartTime = false;
+	bool gotoMovie = false;
+
+	PlayerStats playerBefore = student->tempStat();
+
+	slowPrint("===== WEEK 13 =====");
+	cout << endl;
+
+	slowPrint("You just finished the last class of the semester.");
+	slowPrint("You are now free of any classes, you are allowed to study on your own before the final exam.");
+
+
+	while (!explorationFinished)
+	{
+		if (currentLocation == 1)
+		{
+			if (student->energy <= 0)
+			{
+				cout << endl;
+				slowPrint("You have completely run out of energy!");
+
+				slowPrint("You must use an item or return home.");
+
+				cout << endl;
+			}
+
+			cout << endl;
+			cout << "===== APU =====" << endl;
+			cout << endl;
+
+			cout << "1. Study at the Library" << endl;
+			cout << "2. Study with Your Classmates" << endl;
+			cout << "3. Visit the APU Bila Bila" << endl;
+			cout << "4. Open Inventory" << endl;
+			cout << "5. Go to KLCC" << endl;
+			cout << "6. Go Home" << endl;
+			cout << "What would you like to do? : ";
+
+			cin >> option;
+
+			if (!isInputValid())
+			{
+				continue;
+			}
+
+			switch (option)
+			{
+			case 1:
+			{
+				PlayerStats activityBefore =
+					student->tempStat();
+
+				if (studiedLibrary)
+				{
+					cout << endl;
+					slowPrint("You have already studied at the library today.");
+
+					break;
+				}
+
+				if (student->energy < 7)
+				{
+					cout << endl;
+					slowPrint("You don't have enough energy to study at the library!");
+
+					slowPrint("You need at least 7 Energy.");
+
+					break;
+				}
+
+				cout << endl;
+				slowPrint("You decided to study at the library.");
+
+				slowPrint("You started preparing for the final exam.");
+
+				slowPrint("You gained Knowledge, but used some Energy.");
+
+				cout << endl;
+
+				student->knowledge += 4;
+				student->energy -= 7;
+
+				student->checkStats();
+				student->displayStatChanges(activityBefore);
+
+				studiedLibrary = true;
+				break;
+			}
+
+			case 2:
+			{
+				PlayerStats activityBefore = student->tempStat();
+
+				if (studiedWithClassmates)
+				{
+					cout << endl;
+					slowPrint("You have already studied with your classmates.");
+
+					break;
+				}
+
+				if (student->energy <= 0)
+				{
+					cout << endl;
+					slowPrint("You are too tired to study with your classmates.");
+
+					break;
+				}
+
+				cout << endl;
+				slowPrint("You studied together with your classmates for the final exam.");
+
+				slowPrint("They explained you the topics that you don't understand.");
+
+				student->knowledge += 4;
+				student->motivation += 2;
+				student->energy -= 7;
+
+				student->checkStats();
+
+				cout << endl;
+				student->displayStatChanges(activityBefore);
+
+				studiedWithClassmates = true;
+				break;
+			}
+
+			case 3:
+				cout << endl;
+				slowPrint("You decided to visit the APU Bila Bila.");
+
+				cout << endl;
+				campusShop(student);
+				break;
+
+			case 4:
+				cout << endl;
+				student->openInventory();
+				student->checkStats();
+				break;
+
+			case 5:
+				cout << endl;
+				slowPrint("You decided to travel to KLCC.");
+
+				currentLocation = 2;
+				break;
+
+			case 6:
+				cout << endl;
+				slowPrint("You decided to return home.");
+
+				slowPrint("You rested well for this week");
+
+				student->energy += 15;
+				student->focus += 5;
+				student->checkStats();
+
+				explorationFinished = true;
+				break;
+
+			default:
+				cout << endl;
+				cout << "Invalid Input! Try Putting (1 to 6)" << endl;
+
+				continue;
+			}
+		}
+		else if (currentLocation == 2)
+		{
+			if (student->energy <= 0)
+			{
+				cout << endl;
+				slowPrint("You have completely run out of energy!");
+
+				slowPrint("You must use an item or return home.");
+
+				cout << endl;
+			}
+
+			cout << endl;
+			cout << "===== KLCC =====" << endl;
+			cout << endl;
+
+			cout << "1. Work at Your Part-Time Job" << endl;
+			cout << "2. Visit the Downtown Store" << endl;
+			cout << "3. Visit TGV and watch a movie" << endl;
+			cout << "4. Open Inventory" << endl;
+			cout << "5. Go to APU" << endl;
+			cout << "6. Go Home" << endl;
+			cout << "What would you like to do? : ";
+
+			cin >> option;
+
+			if (!isInputValid())
+			{
+				continue;
+			}
+
+			switch (option)
+			{
+			case 1:
+			{
+				PlayerStats activityBefore = student->tempStat();
+				if (!student->hasPartTimeJob)
+				{
+					cout << endl;
+					slowPrint("You do not have a part-time job!");
+					break;
+				}
+				if (workedPartTime)
+				{
+					cout << endl;
+					slowPrint("You have already worked today.");
+
+					break;
+				}
+
+				if (student->energy < 15)
+				{
+					cout << endl;
+					slowPrint("You don't have enough energy to work!");
+
+					slowPrint("Working requires at least 15 Energy.");
+
+					break;
+				}
+
+				cout << endl;
+				slowPrint("You worked at your part-time job.");
+
+				slowPrint("You received RM15, but the work made you tired.");
+
+				cout << endl;
+
+				student->receiveMoney(15);
+				student->energy -= 15;
+				student->motivation -= 1;
+
+				student->checkStats();
+
+				cout << endl;
+				student->displayStatChanges(activityBefore);
+
+				workedPartTime = true;
+				break;
+			}
+
+			case 2:
+				cout << endl;
+				slowPrint("You decided to visit the Downtown Store.");
+
+				cout << endl;
+				downtownShop(student);
+				break;
+
+			case 3:
+			{
+				PlayerStats activityBefore = student->tempStat();
+
+				if (gotoMovie)
+				{
+					cout << endl;
+					slowPrint("You have already watched a movie today.");
+
+					break;
+				}
+
+				if (student->energy <= 0)
+				{
+					cout << endl;
+					slowPrint("You are too tired even to watch a movie");
+					slowPrint("You might fall asleep!");
+
+					break;
+				}
+
+				cout << endl;
+				slowPrint("You decided to watch a movie.");
+
+				slowPrint("Watching movie costs RM10.");
+
+				if (student->spendMoney(8))
+				{
+					cout << endl;
+					slowPrint("You watched the movie and forgot about your stress.");
+					slowPrint("But you did not like the movie that much.");
+
+					student->motivation += 3;
+					student->focus -= 4;
+					student->energy -= 3;
+
+					student->checkStats();
+
+					cout << endl;
+					student->displayStatChanges(activityBefore);
+
+					gotoMovie = true;
+				}
+
+				break;
+			}
+
+			case 4:
+				cout << endl;
+				student->openInventory();
+				student->checkStats();
+				break;
+
+			case 5:
+				cout << endl;
+				slowPrint("You decided to return to APU.");
+
+				currentLocation = 1;
+				break;
+
+			case 6:
+				cout << endl;
+				slowPrint("You decided to return home from KLCC.");
+
+				slowPrint("You rested well for this week.");
+
+				student->energy += 15;
+				student->focus += 5;
+				student->checkStats();
+
+				explorationFinished = true;
+				break;
+
+			default:
+				cout << endl;
+				cout << "Invalid Input! Try Putting (1 to 6)" << endl;
+
+				continue;
+			}
+		}
+
+		student->checkStats();
+
+		if (student->focus <= 0)
+		{
+			student->isDead();
+			return 3;
+		}
+	}
+
+	cout << endl;
+	cout << "===== Week 13 Result =====" << endl;
+
+	student->displayStatChanges(playerBefore);
+
+	cout << "=========================" << endl;
+
+	return 1;
+}
