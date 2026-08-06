@@ -139,6 +139,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ascii.cpp" />
     <ClCompile Include="Challenge.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="Encounters.cpp" />
@@ -148,6 +149,7 @@
     <ClCompile Include="Validations.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ascii.h" />
     <ClInclude Include="Challenge.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="Encounters.h" />

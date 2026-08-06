@@ -36,6 +36,9 @@
     <ClCompile Include="exploration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Ascii.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -63,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="exploration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ascii.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
