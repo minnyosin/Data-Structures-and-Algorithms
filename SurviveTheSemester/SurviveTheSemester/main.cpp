@@ -21,19 +21,12 @@ int randomLuck()
 void copyPlayerData(Player* originalPlayer, Player* copiedPlayer)
 {
 	copiedPlayer->name = originalPlayer->name;
-
 	copiedPlayer->focus = originalPlayer->focus;
-
 	copiedPlayer->knowledge = originalPlayer->knowledge;
-
 	copiedPlayer->energy = originalPlayer->energy;
-
 	copiedPlayer->motivation = originalPlayer->motivation;
-
 	copiedPlayer->luck = originalPlayer->luck;
-
 	copiedPlayer->money = originalPlayer->money;
-
 	copiedPlayer->inventory.clear();
 
 	InventoryNode* current = originalPlayer->inventory.head;
@@ -83,7 +76,6 @@ int playWeekSixToTwelve(Player* student)
 	cout << endl;
 
 	slowPrint("You arrived at APU expecting a normal class.");
-
 	slowPrint("However, the lecturer surprised you with surprise quiz!");
 
 	int quizResult = surpriseQuizChallenge(student);
@@ -102,7 +94,6 @@ int playWeekSixToTwelve(Player* student)
 	{
 		cout << endl;
 		slowPrint("You failed the Surprise Quiz.");
-
 		slowPrint("However, your semester continued.");
 	}
 
@@ -125,7 +116,6 @@ int playWeekSixToTwelve(Player* student)
 	{
 		cout << endl;
 		slowPrint("You failed to submit the Group Assignment properly.");
-
 		slowPrint("However, you were still allowed to continue the semester.");
 	}
 

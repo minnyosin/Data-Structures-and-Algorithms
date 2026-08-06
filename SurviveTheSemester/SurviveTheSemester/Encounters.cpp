@@ -1247,9 +1247,9 @@ int groupAssignmentChallenge(Player* student)
 		else
 		{
 			cout << endl;
-			slowPrint("The final submission deadline is tonight.");
+			//slowPrint("The final submission deadline is tonight.");
 
-			slowPrint("This is your last chance to finish the assignment.");
+			//slowPrint("This is your last chance to finish the assignment.");
 		}
 
 		cout << endl;
