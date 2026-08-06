@@ -1178,6 +1178,13 @@ int groupAssignmentChallenge(Player* student)
 
 			cout << endl;
 			cout << "===== WEEK " << assignmentWeek << " =====" << endl << endl;
+			if (assignmentWeek == 12)
+			{
+				cout << endl;
+				slowPrint("The final submission deadline is tonight.");
+
+				slowPrint("This is your last chance to finish the assignment.");
+			}
 		}
 		if (movedToNextWeek)
 		{
@@ -1244,13 +1251,6 @@ int groupAssignmentChallenge(Player* student)
 				slowPrint("Because you communicated with your teammates early, the group solved this week's problem before it became serious.");
 			}
 		}
-		else
-		{
-			cout << endl;
-			//slowPrint("The final submission deadline is tonight.");
-
-			//slowPrint("This is your last chance to finish the assignment.");
-		}
 
 		cout << endl;
 		--groupAssignment->challengeTime;
@@ -1259,6 +1259,8 @@ int groupAssignmentChallenge(Player* student)
 
 		if (groupAssignment->isTimeout())
 		{
+			cout << endl;
+			slowPrint("However...");
 			cout << endl;
 			slowPrint("The assignment deadline has arrived!");
 
