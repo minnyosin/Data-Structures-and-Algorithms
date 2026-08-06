@@ -227,7 +227,15 @@ public:
 inline string setName()
 {
 	string name;
-	cout << "Enter your name:";
-	getline(cin, name);
+	bool isNameCorrect = false;
+	while (!isNameCorrect)
+	{
+		name.clear();
+		cout << "Enter your name:";
+		getline(cin, name);
+		
+		isNameCorrect = name.find_first_not_of(" \t\r\n") != string::npos;
+	}
+	
 	return name;
 }
