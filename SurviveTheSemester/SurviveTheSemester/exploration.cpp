@@ -192,6 +192,7 @@ int weekTwoExploration(Player* student)
 					int randomEvent = randomExplorationEvent();
 					if (randomEvent == 1)
 					{
+						senior();
 						slowPrint("You met a helpful senior student.");
 						slowPrint("The senior helped you understand your assignment.");
 						student->knowledge += 2;
@@ -200,11 +201,13 @@ int weekTwoExploration(Player* student)
 					}
 					else if (randomEvent == 2)
 					{
+						money();
 						slowPrint("You found RM 5 while you are walking around!");
 						student->receiveMoney(5);
 					}
 					else if (randomEvent == 3)
 					{
+						activity();
 						slowPrint("You were attracted by the activites in level 3, central point.");
 						slowPrint("You joined some activities and had some fun.");
 						student->motivation += 3;
@@ -236,6 +239,7 @@ int weekTwoExploration(Player* student)
 				case 3:
 				{
 					cout << endl;
+					shop();
 					slowPrint("You decided to visit the Bila Bila");
 					cout << endl;
 
@@ -340,8 +344,10 @@ int weekTwoExploration(Player* student)
 				{
 				case 1:
 				{
+					store();
 					cout << endl;
 					slowPrint(
+						
 						"You decided to visit the Downtown Store."
 					);
 
@@ -372,6 +378,7 @@ int weekTwoExploration(Player* student)
 					}
 
 					cout << endl;
+					cafe();
 					slowPrint(
 						"You found a cafe looking for part-time workers."
 					);
@@ -434,6 +441,7 @@ int weekTwoExploration(Player* student)
 
 					if (randomEvent == 1)
 					{
+						street();
 						slowPrint(
 							"You found a street performer."
 						);
@@ -446,10 +454,11 @@ int weekTwoExploration(Player* student)
 					}
 					else if (randomEvent == 2)
 					{
+						bag();
 						slowPrint(
 							"You helped someone carry their shopping bags."
 						);
-
+					
 						slowPrint(
 							"They gave you RM5 as thanks."
 						);
@@ -459,6 +468,7 @@ int weekTwoExploration(Player* student)
 					}
 					else if (randomEvent == 3)
 					{
+						lost();
 						slowPrint(
 							"You became lost while exploring Downtown."
 						);
@@ -472,6 +482,7 @@ int weekTwoExploration(Player* student)
 					}
 					else
 					{
+						classmate();
 						slowPrint(
 							"You met one of your classmates."
 						);
@@ -653,6 +664,7 @@ int weekSixExploration(Player* student)
 				}
 
 				cout << endl;
+				library();
 				slowPrint("You decided to study at the library.");
 
 				slowPrint("Even though the lecturer has not officially announced the assignment,");
@@ -713,6 +725,7 @@ int weekSixExploration(Player* student)
 
 			case 3:
 				cout << endl;
+				shop();
 				slowPrint("You decided to visit the APU Bila Bila.");
 
 				cout << endl;
@@ -836,6 +849,7 @@ int weekSixExploration(Player* student)
 
 			case 2:
 				cout << endl;
+				store();
 				slowPrint("You decided to visit the Downtown Store.");
 
 				cout << endl;
@@ -863,6 +877,7 @@ int weekSixExploration(Player* student)
 				}
 
 				cout << endl;
+				cafe();
 				slowPrint("You decided to visit the Gaming Cafe.");
 
 				slowPrint("Playing games costs RM8.");
@@ -1021,6 +1036,7 @@ int weekThirteenExploration(Player* student)
 				}
 
 				cout << endl;
+				library();
 				slowPrint("You decided to study at the library.");
 
 				slowPrint("You started preparing for the final exam.");
@@ -1079,6 +1095,7 @@ int weekThirteenExploration(Player* student)
 
 			case 3:
 				cout << endl;
+				shop();
 				
 				slowPrint("You decided to visit the APU Bila Bila.");
 
@@ -1203,6 +1220,7 @@ int weekThirteenExploration(Player* student)
 
 			case 2:
 				cout << endl;
+				store();
 				slowPrint("You decided to visit the Downtown Store.");
 
 				cout << endl;
@@ -1231,6 +1249,7 @@ int weekThirteenExploration(Player* student)
 				}
 
 				cout << endl;
+				cinema();
 				slowPrint("You decided to watch a movie.");
 
 				slowPrint("Watching movie costs RM10.");

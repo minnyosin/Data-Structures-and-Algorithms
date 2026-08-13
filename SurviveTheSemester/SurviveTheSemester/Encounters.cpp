@@ -4,6 +4,7 @@
 #include <random>
 #include <iostream>
 #include "Validations.h"
+#include "Ascii.h"
 
 int randomEnemyAttack()
 {
@@ -23,6 +24,7 @@ int randomLuckCheck()
 
 int phoneDistractionChallenge(Player* student)
 {
+	phone();
 	slowPrint("You encountered a Phone Distraction!");
 	cout << endl;
 
@@ -195,6 +197,7 @@ int phoneDistractionChallenge(Player* student)
 }
 int procrastinationChallenge(Player* student) // may be I will use this encounter later in the game :)
 {
+	procrastination();
 	slowPrint("You encountered Procrastination!");
 	cout << endl;
 
@@ -406,6 +409,7 @@ int procrastinationChallenge(Player* student) // may be I will use this encounte
 }
 int attendingClassEncounter(Player* student)
 {
+	classroom();
 	cout << endl;
 	slowPrint("You decided to attend your class!");
 	cout << endl;
@@ -695,6 +699,7 @@ int attendingClassEncounter(Player* student)
 
 int surpriseQuizChallenge(Player* student)
 {
+	void test();
 	cout << endl;
 	slowPrint("You encountered a Surprise Quiz!");
 	cout << endl;
@@ -956,6 +961,7 @@ int surpriseQuizChallenge(Player* student)
 
 int groupAssignmentChallenge(Player* student)
 {
+	groupassignment();
 	cout << endl;
 	slowPrint("You encountered a Group Assignment Crisis!");
 	Challenge* groupAssignment = new Challenge("Group Assignment Crisis", 110, 10, 6);
