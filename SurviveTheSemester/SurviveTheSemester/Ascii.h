@@ -1,6 +1,6 @@
 #pragma once
 
-void procrastination();
+void procrastinationAscii();
 void phone();
 void classroom();
 void test();
