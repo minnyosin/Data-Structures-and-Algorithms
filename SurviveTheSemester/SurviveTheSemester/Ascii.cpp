@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-void procrastination() {
+void procrastinationAscii() {
 	cout << R"(
 o              o   
  \            /     
