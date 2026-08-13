@@ -212,6 +212,7 @@ int weekTwoExploration(Player* student)
 					}
 					else
 					{
+						elevator();
 						slowPrint("You entered the elevator during peak hour.");
 						slowPrint("It stopped at almost every floor before reaching your destination.");
 						slowPrint("You lost some energy and patience.");

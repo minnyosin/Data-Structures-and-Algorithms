@@ -9,3 +9,8 @@ void groupassignment();
 void home();
 void apu();
 void klcc();
+void library();
+void cafe();
+void shop();
+void cinema();
+void elevator();
