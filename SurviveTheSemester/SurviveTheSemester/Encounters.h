@@ -11,3 +11,4 @@ int surpriseQuizChallenge(Player* student);
 int groupAssignmentChallenge(Player* student);
 
 int procrastinationChallenge(Player* student);
+int finalExamChallenge(Player* student);

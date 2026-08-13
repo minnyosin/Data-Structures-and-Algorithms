@@ -332,65 +332,285 @@ int main()
 
 	delete weekSixToTwelveCheckpoint;
 
-// week 13
+	// week 13 - 15
 
-	cout << endl;
-	
-	Player* weekThirteenCheckpoint = new Player(playerName, playerLuck);
+	Player* weekThirteenCheckpoint =
+		new Player(playerName, playerLuck);
 
-	copyPlayerData(student, weekThirteenCheckpoint);
+	copyPlayerData(
+		student,
+		weekThirteenCheckpoint
+	);
 
-	bool weekThirteenFinished = false;
+	bool semesterFinished = false;
 
-	while (!weekThirteenFinished)
+	while (!semesterFinished)
 	{
-		int weekThirteenResult = weekThirteenExploration(student);
+		// week 13
 
-		if (weekThirteenResult == 1)
+		bool weekThirteenFinished = false;
+
+		while (!weekThirteenFinished)
 		{
-			cout << endl;
-			slowPrint("Another week passed just like that...");
+			int weekThirteenResult =
+				weekThirteenExploration(student);
 
-			weekThirteenFinished = true;
-		}
-		else if (weekThirteenResult == 3)
-		{
-			cout << endl;
-			slowPrint("You could not survive Week 13");
-
-			if (askRetryCurrentWeek())
+			if (weekThirteenResult == 1)
 			{
-				copyPlayerData(weekThirteenCheckpoint, student);
-
 				cout << endl;
-				slowPrint("Restarting from Week 13...");
+				slowPrint(
+					"Another week passed just like that..."
+				);
+
+				weekThirteenFinished = true;
+			}
+			else if (weekThirteenResult == 3)
+			{
+				cout << endl;
+				slowPrint(
+					"You could not survive Week 13."
+				);
+
+				if (askRetryCurrentWeek())
+				{
+					copyPlayerData(
+						weekThirteenCheckpoint,
+						student
+					);
+
+					cout << endl;
+					slowPrint(
+						"Restarting from Week 13..."
+					);
+				}
+				else
+				{
+					delete weekThirteenCheckpoint;
+					delete student;
+
+					return 0;
+				}
 			}
 			else
 			{
+				cout << endl;
+				cout << "Unknown Week 13 result!"
+					<< endl;
+
 				delete weekThirteenCheckpoint;
 				delete student;
 
 				return 0;
 			}
 		}
-		else
+
+
+		// week 14
+
+		cout << endl;
+		slowPrint(
+			"The Final Exam was getting closer."
+		);
+
+		slowPrint(
+			"You decided to stay home during Week 14 and focus on revision."
+		);
+
+		Player* weekFourteenCheckpoint =
+			new Player(playerName, playerLuck);
+
+		copyPlayerData(
+			student,
+			weekFourteenCheckpoint
+		);
+
+		bool weekFourteenFinished = false;
+
+		while (!weekFourteenFinished)
 		{
-			cout << endl;
-			cout << "Unknown week 13 result!" << endl;
+			int weekFourteenResult =
+				procrastinationChallenge(student);
 
-			delete weekThirteenCheckpoint;
-			delete student;
+			if (weekFourteenResult == 1)
+			{
+				cout << endl;
+				slowPrint(
+					"You successfully completed your Week 14 revision!"
+				);
 
-			return 0;
+				slowPrint(
+					"You now feel more prepared for the Final Exam."
+				);
+
+				weekFourteenFinished = true;
+			}
+			else if (weekFourteenResult == 2)
+			{
+				cout << endl;
+				slowPrint(
+					"You failed to complete all of your revision."
+				);
+
+				slowPrint(
+					"However, the Final Exam could no longer be avoided."
+				);
+
+				weekFourteenFinished = true;
+			}
+			else if (weekFourteenResult == 3)
+			{
+				cout << endl;
+				slowPrint(
+					"You could not survive Week 14."
+				);
+
+				if (askRetryCurrentWeek())
+				{
+					copyPlayerData(
+						weekFourteenCheckpoint,
+						student
+					);
+
+					cout << endl;
+					slowPrint(
+						"Restarting from Week 14..."
+					);
+				}
+				else
+				{
+					delete weekFourteenCheckpoint;
+					delete weekThirteenCheckpoint;
+					delete student;
+
+					return 0;
+				}
+			}
+			else
+			{
+				cout << endl;
+				cout << "Unknown Week 14 result!"
+					<< endl;
+
+				delete weekFourteenCheckpoint;
+				delete weekThirteenCheckpoint;
+				delete student;
+
+				return 0;
+			}
 		}
+
+		delete weekFourteenCheckpoint;
+
+
+		// week 15 - final examination
+
+		Player* finalExamCheckpoint = new Player(playerName, playerLuck);
+
+		copyPlayerData(student, finalExamCheckpoint);
+
+		bool finalExamFinished = false;
+
+		while (!finalExamFinished)
+		{
+			int finalExamResult = finalExamChallenge(student);
+
+			if (finalExamResult == 1)
+			{
+				cout << endl;
+				slowPrint("You passed your Final Examination!");
+
+				cout << endl;
+				cout << "================================" << endl;
+
+				cout << "       SEMESTER COMPLETED" << endl;
+
+				cout << "================================" << endl;
+
+				finalExamFinished = true;
+				semesterFinished = true;
+			}
+			else if (
+				finalExamResult == 2 || finalExamResult == 3)
+			{
+				int option;
+				bool finalChoiceMade = false;
+
+				cout << endl;
+				slowPrint("You failed the Final Examination.");
+
+				while (!finalChoiceMade)
+				{
+					cout << endl;
+					cout << "1. Quit the Game" << endl;
+					cout << "2. Retry the Final Exam" << endl;
+
+					cout << "3. Replay from Week 13" << endl;
+
+					cout << "What would you like to do? : ";
+
+					cin >> option;
+
+					if (!isInputValid())
+					{
+						continue;
+					}
+
+					switch (option)
+					{
+					case 1:
+						cout << endl;
+						slowPrint("You decided to end your semester journey.");
+
+						delete finalExamCheckpoint;
+						delete weekThirteenCheckpoint;
+						delete student;
+
+						return 0;
+
+					case 2:
+						copyPlayerData(finalExamCheckpoint, student);
+
+						cout << endl;
+						slowPrint("Restarting the Final Exam...");
+
+						finalChoiceMade = true;
+						break;
+
+					case 3:
+						copyPlayerData(weekThirteenCheckpoint, student);
+
+						cout << endl;
+						slowPrint("Returning to Week 13...");
+
+						finalExamFinished = true;
+						finalChoiceMade = true;
+						break;
+
+					default:
+						cout << endl;
+						cout << "Invalid Input! Try Putting (1 to 3)" << endl;
+
+						continue;
+					}
+				}
+			}
+			else
+			{
+				cout << endl;
+				cout << "Unknown Final Exam result!" << endl;
+
+				delete finalExamCheckpoint;
+				delete weekThirteenCheckpoint;
+				delete student;
+
+				return 0;
+			}
+		}
+
+		delete finalExamCheckpoint;
 	}
 
 	delete weekThirteenCheckpoint;
-
-	// will add week 13 - 15 here, most of the code will be the same style, make a copy, go through the week, check for three condition, do the same as before. 
-	// only one thing will be different, for week 12 you will have 2 week of studying, like free exploration. after that, final exam come. 
-	// losing to final exam will also reloop back to free exploration week, that's all for now
-
 
 	delete student;
 	return 0;

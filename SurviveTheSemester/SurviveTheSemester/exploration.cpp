@@ -1174,6 +1174,7 @@ int weekThirteenExploration(Player* student)
 			case 1:
 			{
 				PlayerStats activityBefore = student->tempStat();
+
 				if (!student->hasPartTimeJob)
 				{
 					cout << endl;
@@ -1199,6 +1200,7 @@ int weekThirteenExploration(Player* student)
 				}
 
 				cout << endl;
+				cafe();
 				slowPrint("You worked at your part-time job.");
 
 				slowPrint("You received RM15, but the work made you tired.");
