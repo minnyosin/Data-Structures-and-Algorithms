@@ -56,7 +56,7 @@ public:
 	}
 	bool isTimeout()
 	{
-		if (challengeTime == 0)
+		if (challengeTime <= 0)
 		{
 			return true;
 		}

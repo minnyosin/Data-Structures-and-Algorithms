@@ -15,6 +15,7 @@ struct PlayerStats
 	float energy;
 	float motivation;
 	int money;
+	
 };
 
 class Player
@@ -29,6 +30,7 @@ public:
 	int money;
 	InventoryLinkedList inventory;
 	bool hasPartTimeJob;
+	int studyNotesAvailable;
 
 	Player(string name, int luck)
 	{
@@ -40,6 +42,7 @@ public:
 		this->luck = luck;
 		this->money = 30;
 		this->hasPartTimeJob = false;
+		this->studyNotesAvailable = 3;
 	}
 	void checkStats()
 	{

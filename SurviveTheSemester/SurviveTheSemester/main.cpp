@@ -3,7 +3,7 @@
 #include "Encounters.h"
 #include "Display.h"
 #include "Validations.h"
-#include "Exploration.h"
+#include "exploration.h"
 #include <iostream>
 #include <random>
 #include "Ascii.h"
@@ -28,7 +28,10 @@ void copyPlayerData(Player* originalPlayer, Player* copiedPlayer)
 	copiedPlayer->motivation = originalPlayer->motivation;
 	copiedPlayer->luck = originalPlayer->luck;
 	copiedPlayer->money = originalPlayer->money;
+	copiedPlayer->studyNotesAvailable = originalPlayer->studyNotesAvailable;
+	copiedPlayer->hasPartTimeJob = originalPlayer->hasPartTimeJob;
 	copiedPlayer->inventory.clear();
+	
 
 	InventoryNode* current = originalPlayer->inventory.head;
 
@@ -332,56 +335,43 @@ int main()
 
 	delete weekSixToTwelveCheckpoint;
 
-	// week 13 - 15
+// week 13 - 15
 
-	Player* weekThirteenCheckpoint =
-		new Player(playerName, playerLuck);
+	Player* weekThirteenCheckpoint = new Player(playerName, playerLuck);
 
-	copyPlayerData(
-		student,
-		weekThirteenCheckpoint
-	);
+	copyPlayerData(student, weekThirteenCheckpoint);
 
 	bool semesterFinished = false;
 
 	while (!semesterFinished)
 	{
-		// week 13
+	
+	// week 13
 
 		bool weekThirteenFinished = false;
 
 		while (!weekThirteenFinished)
 		{
-			int weekThirteenResult =
-				weekThirteenExploration(student);
+			int weekThirteenResult = weekThirteenExploration(student);
 
 			if (weekThirteenResult == 1)
 			{
 				cout << endl;
-				slowPrint(
-					"Another week passed just like that..."
-				);
+				slowPrint("Another week passed just like that...");
 
 				weekThirteenFinished = true;
 			}
 			else if (weekThirteenResult == 3)
 			{
 				cout << endl;
-				slowPrint(
-					"You could not survive Week 13."
-				);
+				slowPrint("You could not survive Week 13.");
 
 				if (askRetryCurrentWeek())
 				{
-					copyPlayerData(
-						weekThirteenCheckpoint,
-						student
-					);
+					copyPlayerData(weekThirteenCheckpoint,student);
 
 					cout << endl;
-					slowPrint(
-						"Restarting from Week 13..."
-					);
+					slowPrint("Restarting from Week 13...");
 				}
 				else
 				{
@@ -394,8 +384,7 @@ int main()
 			else
 			{
 				cout << endl;
-				cout << "Unknown Week 13 result!"
-					<< endl;
+				cout << "Unknown Week 13 result!"<< endl;
 
 				delete weekThirteenCheckpoint;
 				delete student;
@@ -405,76 +394,41 @@ int main()
 		}
 
 
-		// week 14
+	// week 14
 
 		cout << endl;
-		slowPrint(
-			"The Final Exam was getting closer."
-		);
 
-		slowPrint(
-			"You decided to stay home during Week 14 and focus on revision."
-		);
+		Player* weekFourteenCheckpoint = new Player(playerName, playerLuck);
 
-		Player* weekFourteenCheckpoint =
-			new Player(playerName, playerLuck);
-
-		copyPlayerData(
-			student,
-			weekFourteenCheckpoint
-		);
+		copyPlayerData(student,weekFourteenCheckpoint);
 
 		bool weekFourteenFinished = false;
 
 		while (!weekFourteenFinished)
 		{
-			int weekFourteenResult =
-				procrastinationChallenge(student);
+			int weekFourteenResult = procrastinationChallenge(student);
 
 			if (weekFourteenResult == 1)
 			{
-				cout << endl;
-				slowPrint(
-					"You successfully completed your Week 14 revision!"
-				);
-
-				slowPrint(
-					"You now feel more prepared for the Final Exam."
-				);
 
 				weekFourteenFinished = true;
 			}
 			else if (weekFourteenResult == 2)
 			{
-				cout << endl;
-				slowPrint(
-					"You failed to complete all of your revision."
-				);
-
-				slowPrint(
-					"However, the Final Exam could no longer be avoided."
-				);
 
 				weekFourteenFinished = true;
 			}
 			else if (weekFourteenResult == 3)
 			{
 				cout << endl;
-				slowPrint(
-					"You could not survive Week 14."
-				);
+				slowPrint("You could not survive Week 14.");
 
 				if (askRetryCurrentWeek())
 				{
-					copyPlayerData(
-						weekFourteenCheckpoint,
-						student
-					);
+					copyPlayerData(weekFourteenCheckpoint,student);
 
 					cout << endl;
-					slowPrint(
-						"Restarting from Week 14..."
-					);
+					slowPrint("Restarting from Week 14...");
 				}
 				else
 				{
@@ -488,8 +442,7 @@ int main()
 			else
 			{
 				cout << endl;
-				cout << "Unknown Week 14 result!"
-					<< endl;
+				cout << "Unknown Week 14 result!"<< endl;
 
 				delete weekFourteenCheckpoint;
 				delete weekThirteenCheckpoint;
@@ -502,7 +455,7 @@ int main()
 		delete weekFourteenCheckpoint;
 
 
-		// week 15 - final examination
+	// week 15 - final examination
 
 		Player* finalExamCheckpoint = new Player(playerName, playerLuck);
 
@@ -517,7 +470,6 @@ int main()
 			if (finalExamResult == 1)
 			{
 				cout << endl;
-				slowPrint("You passed your Final Examination!");
 
 				cout << endl;
 				cout << "================================" << endl;
@@ -536,8 +488,6 @@ int main()
 				bool finalChoiceMade = false;
 
 				cout << endl;
-				slowPrint("You failed the Final Examination.");
-
 				while (!finalChoiceMade)
 				{
 					cout << endl;

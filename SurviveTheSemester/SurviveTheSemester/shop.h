@@ -3,3 +3,4 @@
 
 void campusShop(Player* student);
 void downtownShop(Player* student);
+bool buyShop(Player* student, Item item);

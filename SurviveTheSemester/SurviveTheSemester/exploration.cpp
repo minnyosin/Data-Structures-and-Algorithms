@@ -1,4 +1,4 @@
-#include "Exploration.h"
+#include "exploration.h"
 #include "Encounters.h"
 #include "shop.h"
 #include "Display.h"
@@ -60,7 +60,7 @@ int weekTwoExploration(Player* student)
 		case 1:
 			cout << endl;
 			apu();
-			slowPrint("You decided to go to APU and attend class regularly.");
+			slowPrint("You decided to go to APU and tried to attend class regularly.");
 			slowPrint("You arrived before your class started.");
 			cout << endl;
 
@@ -150,14 +150,12 @@ int weekTwoExploration(Player* student)
 					if (classResult == 1)
 					{
 						cout << endl;
-						slowPrint("You successfully completed the class!");
-						slowPrint("You can continue exploration the campus.");
+						slowPrint("After class, you still had time to explore the campus.");
 					}
 					else if (classResult == 2)
 					{
 						cout << endl;
-						slowPrint("You failed to understand the lecture.");
-						slowPrint("You can still explore the campus.");
+						slowPrint("The class ended, but you could still explore the campus.");
 					}
 					else if (classResult == 3)
 					{
@@ -600,10 +598,8 @@ int weekSixExploration(Player* student)
 	cout << endl;
 	slowPrint("===== Week 6 Exploration =====");
 	cout << endl;
-
-	slowPrint("You finished your Surprise Quiz.");
-
-	slowPrint("You still have some time before going back home");
+	slowPrint("The Surprise Quiz was finally over.");
+	slowPrint("You still had some time before returning home.");
 
 	while (!explorationFinished)
 	{
@@ -960,7 +956,6 @@ int weekThirteenExploration(Player* student)
 {
 	int option;
 	int currentLocation = 1;
-	int currentWeek = 13;
 
 	bool explorationFinished = false;
 	bool studiedLibrary = false;
@@ -1067,7 +1062,7 @@ int weekThirteenExploration(Player* student)
 					break;
 				}
 
-				if (student->energy <= 0)
+				if (student->energy < 7)
 				{
 					cout << endl;
 					slowPrint("You are too tired to study with your classmates.");
@@ -1256,11 +1251,11 @@ int weekThirteenExploration(Player* student)
 
 				slowPrint("Watching movie costs RM10.");
 
-				if (student->spendMoney(8))
+				if (student->spendMoney(10))
 				{
 					cout << endl;
 					slowPrint("You watched the movie and forgot about your stress.");
-					slowPrint("But you did not like the movie that much.");
+					slowPrint("The movie was not amazing, but you enjoyed taking a break.");
 
 					student->motivation += 3;
 					student->focus -= 4;

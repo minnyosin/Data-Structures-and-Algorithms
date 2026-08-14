@@ -102,6 +102,12 @@ int phoneDistractionChallenge(Player* student)
 			}
 
 		}
+		student->checkStats();
+		if (student->isDead())
+		{
+			delete phoneDistraction;
+			return 3;
+		}
 		if (phoneDistraction->isDead())
 		{
 
@@ -243,7 +249,6 @@ int attendingClassEncounter(Player* student)
 				{
 					cout << endl;
 					slowPrint("You don't have enough energy to listen carefully!");
-
 					slowPrint("Try recovering some energy first.");
 
 					continue;
@@ -251,11 +256,8 @@ int attendingClassEncounter(Player* student)
 
 				cout << endl;
 				slowPrint("You focused on what the lecturer was explaining.");
-
 				slowPrint("You understood some parts of the difficult topic.");
-
-				slowPrint(
-					"You gained knowledge, but used some energy.");
+				slowPrint("You gained knowledge, but used some energy.");
 
 				cout << endl;
 
@@ -279,9 +281,7 @@ int attendingClassEncounter(Player* student)
 
 				cout << endl;
 				slowPrint("You started taking detailed notes.");
-
 				slowPrint("Writing everything helped you understand the topic.");
-
 				slowPrint("However, taking notes used some of your focus.");
 
 				cout << endl;
@@ -305,9 +305,7 @@ int attendingClassEncounter(Player* student)
 
 				cout << endl;
 				slowPrint("You raised your hand and asked the lecturer a question.");
-
 				slowPrint("The lecturer explained the difficult topic again.");
-
 				slowPrint("You gained a lot of knowledge from the explanation.");
 
 				cout << endl;
@@ -318,13 +316,19 @@ int attendingClassEncounter(Player* student)
 				difficultLecture->challengeLevel -= 18;
 
 				slowPrint("You were too busy speaking with the lecturer.");
-
 				slowPrint("Nothing distracted you during this round!");
 
 				break;
 
 			case 4:
 				student->openInventory();
+				student->checkStats();
+
+				if (student->isDead())
+				{
+					delete difficultLecture;
+					return 3;
+				}
 
 				continue;
 
@@ -335,16 +339,19 @@ int attendingClassEncounter(Player* student)
 				continue;
 			}
 		}
-
+		student->checkStats();
+		if (student->isDead())
+		{
+			delete difficultLecture;
+			return 3;
+		}
 		if (difficultLecture->isDead())
 		{
 			--difficultLecture->challengeTime;
 
 			cout << endl;
 			slowPrint("You successfully finished attending the class!");
-
 			slowPrint("You understood the difficult lecture.");
-
 			slowPrint("You kept all the knowledge you gained during class!");
 
 			cout << endl;
@@ -371,49 +378,30 @@ int attendingClassEncounter(Player* student)
 			if (randomAttack == 1)
 			{
 				slowPrint("The lecturer started explaining a very difficult part!");
-
 				slowPrint("You became confused and lost some focus.");
 
 				student->focus -= 6;
 			}
 			else if (randomAttack == 2)
 			{
-				slowPrint(
-					"A notification appeared on your phone!"
-				);
-
-				slowPrint(
-					"You checked your phone and missed part of the explanation."
-				);
+				slowPrint("A notification appeared on your phone!");
+				slowPrint("You checked your phone and missed part of the explanation.");
 
 				student->focus -= 5;
 			}
 			else if (randomAttack == 3)
 			{
-				slowPrint(
-					"Your friend started speaking to you during class."
-				);
-
-				slowPrint(
-					"You tried to listen to your friend and the lecturer together."
-				);
-
-				slowPrint(
-					"You lost some focus and energy."
-				);
+				slowPrint("Your friend started speaking to you during class.");
+				slowPrint("You tried to listen to your friend and the lecturer together.");
+				slowPrint("You lost some focus and energy.");
 
 				student->focus -= 4;
 				student->energy -= 3;
 			}
 			else
 			{
-				slowPrint(
-					"The lecturer started explaining the topic too quickly!"
-				);
-
-				slowPrint(
-					"You struggled to follow the explanation."
-				);
+				slowPrint("The lecturer started explaining the topic too quickly!");
+				slowPrint("You struggled to follow the explanation.");
 
 				student->energy -= 6;
 				student->motivation -= 1;
@@ -429,9 +417,7 @@ int attendingClassEncounter(Player* student)
 		{
 			slowPrint("The class has ended!");
 			slowPrint("You could not understand the difficult lecture.");
-
-			slowPrint("You lost all the knowledge gained during this class."
-			);
+			slowPrint("You lost all the knowledge gained during this class.");
 
 			cout << endl;
 
@@ -530,7 +516,6 @@ int surpriseQuizChallenge(Player* student)
 			{
 				cout << endl;
 				slowPrint("You don't have enough energy to answer the question!");
-
 				slowPrint("Try recovering some energy first.");
 
 				continue;
@@ -538,7 +523,6 @@ int surpriseQuizChallenge(Player* student)
 
 			cout << endl;
 			slowPrint("You used your knowledge to answer the question.");
-
 			slowPrint("You remembered something from your previous classes.");
 
 			cout << endl;
@@ -561,7 +545,6 @@ int surpriseQuizChallenge(Player* student)
 
 			cout << endl;
 			slowPrint("You carefully examined every possible answer.");
-
 			slowPrint("You found an answer that made the most sense.");
 
 			cout << endl;
@@ -576,7 +559,6 @@ int surpriseQuizChallenge(Player* student)
 		{
 			cout << endl;
 			slowPrint("You could not remember the answer.");
-
 			slowPrint("You decided to make a lucky guess!");
 
 			cout << endl;
@@ -598,7 +580,6 @@ int surpriseQuizChallenge(Player* student)
 			{
 				cout << endl;
 				slowPrint("Your lucky guess was completely wrong!");
-
 				slowPrint("You began doubting your other answers.");
 
 				student->focus -= 8;
@@ -614,6 +595,12 @@ int surpriseQuizChallenge(Player* student)
 			student->openInventory();
 			student->checkStats();
 
+			if (student->isDead())
+			{
+				delete surpriseQuiz;
+				return 3;
+			}
+
 			continue;
 
 		default:
@@ -622,14 +609,18 @@ int surpriseQuizChallenge(Player* student)
 
 			continue;
 		}
-
+		student->checkStats();
+		if (student->isDead())
+		{
+			delete surpriseQuiz;
+			return 3;
+		}
 		if (surpriseQuiz->isDead())
 		{
 			--surpriseQuiz->challengeTime;
 
 			cout << endl;
 			slowPrint("You successfully completed the Surprise Quiz!");
-
 			slowPrint("You felt more confident about your studies.");
 
 			student->motivation += 2;
@@ -659,7 +650,6 @@ int surpriseQuizChallenge(Player* student)
 			if (randomAttack == 1)
 			{
 				slowPrint("The question contained very confusing words.");
-
 				slowPrint("You started doubting your answer.");
 
 				student->focus -= 6;
@@ -667,7 +657,6 @@ int surpriseQuizChallenge(Player* student)
 			else if (randomAttack == 2)
 			{
 				slowPrint("Another student disturb you by keep asking for answers");
-
 				slowPrint("The lecturer noticed that and warned both of you!");
 
 				student->motivation -= 2;
@@ -676,7 +665,6 @@ int surpriseQuizChallenge(Player* student)
 			else if (randomAttack == 3)
 			{
 				slowPrint("You suddenly forgot an important formula.");
-
 				slowPrint("You struggled to remember it.");
 
 				student->focus -= 7;
@@ -684,7 +672,6 @@ int surpriseQuizChallenge(Player* student)
 			else
 			{
 				slowPrint("Another student submitted the quiz early.");
-
 				slowPrint("You started rushing through your answers.");
 
 				student->energy -= 5;
@@ -762,7 +749,6 @@ int groupAssignmentChallenge(Player* student)
 	cout << endl;
 
 	slowPrint("Your lecturer announced the Group Assignment.");
-
 	slowPrint("Your group has until Week 12 to complete it.");
 
 	cout << endl;
@@ -803,7 +789,6 @@ int groupAssignmentChallenge(Player* student)
 			{
 				cout << endl;
 				slowPrint("You don't have enough energy to complete your part!");
-
 				slowPrint("Try recovering some energy first.");
 
 				continue;
@@ -811,7 +796,6 @@ int groupAssignmentChallenge(Player* student)
 
 			cout << endl;
 			slowPrint("You continued working on your assigned part.");
-
 			slowPrint("You gained some knowledge from doing the work.");
 
 			cout << endl;
@@ -836,9 +820,7 @@ int groupAssignmentChallenge(Player* student)
 
 			cout << endl;
 			slowPrint("You organised a meeting with your teammates.");
-
 			slowPrint("Everyone now understands their responsibility.");
-
 			slowPrint("Good communication prevented a problem this round!");
 
 			cout << endl;
@@ -863,9 +845,7 @@ int groupAssignmentChallenge(Player* student)
 
 			cout << endl;
 			slowPrint("One teammate did not complete their part.");
-
 			slowPrint("You decided to complete their work yourself.");
-
 			slowPrint("You made a lot of progress, but became exhausted.");
 
 			cout << endl;
@@ -895,7 +875,6 @@ int groupAssignmentChallenge(Player* student)
 			{
 				cout << endl;
 				slowPrint("Your teammate completed their part perfectly!");
-
 				slowPrint("The group made a lot of progress.");
 
 				groupAssignment->challengeLevel -= 25;
@@ -904,7 +883,6 @@ int groupAssignmentChallenge(Player* student)
 			{
 				cout << endl;
 				slowPrint("Your teammate submitted incomplete work!");
-
 				slowPrint("You now have even more work to complete.");
 
 				student->focus -= 7;
@@ -920,6 +898,12 @@ int groupAssignmentChallenge(Player* student)
 			student->openInventory();
 			student->checkStats();
 
+			if (student->isDead())
+			{
+				delete groupAssignment;
+				return 3;
+			}
+
 			continue;
 
 		default:
@@ -928,7 +912,12 @@ int groupAssignmentChallenge(Player* student)
 
 			continue;
 		}
-
+		student->checkStats();
+		if (student->isDead())
+		{
+			delete groupAssignment;
+			return 3;
+		}
 		if (groupAssignment->isDead())
 		{
 			--groupAssignment->challengeTime;
@@ -938,7 +927,6 @@ int groupAssignmentChallenge(Player* student)
 			cout << "You completed it during week " << assignmentWeek << "!" << endl;
 
 			slowPrint("Your team successfully submitted the project.");
-
 			slowPrint("You gained valuable knowledge from the experience.");
 
 			cout << endl;
@@ -977,7 +965,6 @@ int groupAssignmentChallenge(Player* student)
 			{
 				cout << endl;
 				slowPrint("The final submission deadline is tonight.");
-
 				slowPrint("This is your last chance to finish the assignment.");
 			}
 		}
@@ -988,9 +975,7 @@ int groupAssignmentChallenge(Player* student)
 				if (assignmentWeek == 8)
 				{
 					slowPrint("One of your teammates stopped replying to the group messages.");
-
 					slowPrint("They still had not started their assigned section.");
-
 					slowPrint("You began losing motivation.");
 
 					student->motivation -= 3;
@@ -998,9 +983,7 @@ int groupAssignmentChallenge(Player* student)
 				else if (assignmentWeek == 9)
 				{
 					slowPrint("Two teammates disagreed about the direction of the project.");
-
 					slowPrint("The group spent too much time arguing instead of working.");
-
 					slowPrint("The disagreement made it difficult for you to focus.");
 
 					student->focus -= 6;
@@ -1008,9 +991,7 @@ int groupAssignmentChallenge(Player* student)
 				else if (assignmentWeek == 10)
 				{
 					slowPrint("One teammate misunderstood the section assigned to them.");
-
 					slowPrint("Their work did not match the assignment requirements.");
-
 					slowPrint("You used some of your energy helping them correct it.");
 
 					student->energy -= 7;
@@ -1018,9 +999,7 @@ int groupAssignmentChallenge(Player* student)
 				else if (assignmentWeek == 11)
 				{
 					slowPrint("Your group showed the unfinished project to the lecturer.");
-
 					slowPrint("The lecturer said that several important details were missing.");
-
 					slowPrint("The additional corrections affected your focus and motivation.");
 
 					student->focus -= 4;
@@ -1029,9 +1008,7 @@ int groupAssignmentChallenge(Player* student)
 				else if (assignmentWeek == 12)
 				{
 					slowPrint("One teammate suggested several last-minute changes.");
-
 					slowPrint("The submission deadline was now extremely close.");
-
 					slowPrint("The last-minute work affected your energy and focus.");
 
 					student->energy -= 5;
@@ -1058,9 +1035,7 @@ int groupAssignmentChallenge(Player* student)
 			slowPrint("However...");
 			cout << endl;
 			slowPrint("The assignment deadline has arrived!");
-
 			slowPrint("Your group failed to complete the assignment.");
-
 			slowPrint("The unfinished assignment affected your motivation and focus.");
 
 			cout << endl;
@@ -1227,6 +1202,12 @@ int procrastinationChallenge(Player* student)
 			student->openInventory();
 			student->checkStats();
 
+			if (student->isDead())
+			{
+				delete procrastination;
+				return 3;
+			}
+
 			continue;
 
 		default:
@@ -1235,7 +1216,12 @@ int procrastinationChallenge(Player* student)
 
 			continue;
 		}
-
+		student->checkStats();
+		if (student->isDead())
+		{
+			delete procrastination;
+			return 3;
+		}
 		if (procrastination->isDead())
 		{
 			cout << endl;
@@ -1498,11 +1484,8 @@ int finalExamChallenge(Player* student)
 		{
 			cout << endl;
 			slowPrint("You stopped writing for a moment.");
-
 			slowPrint("You took a deep breath and tried to calm yourself.");
-
 			slowPrint("You recovered some energy and focus.");
-
 			slowPrint("However, you made no progress during this turn.");
 
 			cout << endl;
@@ -1520,7 +1503,6 @@ int finalExamChallenge(Player* student)
 			{
 				cout << endl;
 				slowPrint("You have already used your one Luck chance!");
-
 				slowPrint("You must answer the remaining questions yourself.");
 
 				continue;
@@ -1530,7 +1512,6 @@ int finalExamChallenge(Player* student)
 
 			cout << endl;
 			slowPrint("You encountered a question that you could not remember.");
-
 			slowPrint("You decided to depend on your Luck one final time!");
 
 			cout << endl;
@@ -1538,14 +1519,12 @@ int finalExamChallenge(Player* student)
 			int luckResult = randomLuckCheck();
 
 			cout << "Your Luck : " << student->luck << endl;
-
 			cout << "Luck Roll : " << luckResult << endl;
 
 			if (luckResult <= student->luck)
 			{
 				cout << endl;
 				slowPrint("The question was similar to something you had studied!");
-
 				slowPrint("You successfully remembered the answer.");
 
 				float examDamage = (((student->energy / 100.0) * (student->motivation * (student->focus) * 0.01)) + (student->knowledge / 10.0));
@@ -1558,9 +1537,7 @@ int finalExamChallenge(Player* student)
 			{
 				cout << endl;
 				slowPrint("The question was completely unfamiliar to you!");
-
 				slowPrint("Your lucky guess was wrong.");
-
 				slowPrint("You cannot depend on Luck again during this exam.");
 
 				student->focus -= 8;
@@ -1575,12 +1552,17 @@ int finalExamChallenge(Player* student)
 			cout << endl;
 			student->openInventory();
 			student->checkStats();
+
+			if (student->isDead())
+			{
+				delete finalExam;
+				return 3;
+			}
 			continue;
 
 		default:
 			cout << endl;
-			cout << "Invalid Input! Try Putting (1 to 5)"
-				<< endl;
+			cout << "Invalid Input! Try Putting (1 to 5)" << endl;
 
 			continue;
 		}
@@ -1588,6 +1570,11 @@ int finalExamChallenge(Player* student)
 		--finalExam->challengeTime;
 
 		student->checkStats();
+		if (student->isDead())
+		{
+			delete finalExam;
+			return 3;
+		}
 
 		if (finalExam->isDead())
 		{
@@ -1691,7 +1678,6 @@ int finalExamChallenge(Player* student)
 			cout << endl;
 			slowPrint("The lecturer announced that the exam time was over!");
 			slowPrint("You were unable to complete enough questions.");
-
 			slowPrint("You failed the Final Examination.");
 
 			cout << endl;

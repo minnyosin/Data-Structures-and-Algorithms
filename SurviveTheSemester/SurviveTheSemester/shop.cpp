@@ -1,13 +1,15 @@
 #include "shop.h"
 #include "Validations.h"
 
-void buyShop(Player* student, Item item)
+bool buyShop(Player* student, Item item)
 {
 	if (student->spendMoney(item.price))
 	{
 		student->inventory.addItem(item);
 		cout << "Money Left : RM " << student->money << endl;
+		return true;
 	}
+	return false;
 }
 
 void campusShop(Player* student)
@@ -26,7 +28,7 @@ void campusShop(Player* student)
 		cout << "Money : RM " << student->money << endl << endl;
 		cout << "1. Coffee - RM 5" << endl;
 		cout << "2. Sandwich - RM 6" << endl;
-		cout << "3. Chocolate - Rm 3" << endl;
+		cout << "3. Chocolate - RM 3" << endl;
 		cout << "4. View Inventory" << endl;
 		cout << "5. Leave" << endl;
 		cout << "What would you like to do? : ";
@@ -67,8 +69,8 @@ void downtownShop(Player* student)
 		cout << endl << "===== KLCC Pavillion =====" << endl << endl;
 		cout << "Money : RM " << student->money << endl << endl;
 		cout << "1. Energy Drink - RM 8" << endl;
-		cout << "2. Study Notes - RM 12" << endl;
-		cout << "3. Instant Noodles - Rm 4" << endl;
+		cout << "2. Study Notes - RM 12" <<" (Available: " << student->studyNotesAvailable << ")" << endl;
+		cout << "3. Instant Noodles - RM 4" << endl;
 		cout << "4. View Inventory" << endl;
 		cout << "5. Leave" << endl;
 		cout << "What would you like to do? : ";
@@ -79,7 +81,27 @@ void downtownShop(Player* student)
 		}
 		if (option >= 1 && option <= 3)
 		{
-			buyShop(student, items[option - 1]);
+			if (option == 2)
+			{
+				if (student->studyNotesAvailable <= 0)
+				{
+					cout << endl;
+					slowPrint("The Study Notes are sold out!");
+
+				}
+				else
+				{
+					bool purchaseSuccessful = buyShop(student, items[option - 1]);
+					if (purchaseSuccessful)
+					{
+						--student->studyNotesAvailable;
+					}
+				}
+			}
+			else
+			{
+				buyShop(student, items[option - 1]);
+			}
 		}
 		else if (option == 4)
 		{
