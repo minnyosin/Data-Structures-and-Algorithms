@@ -601,6 +601,7 @@ int weekSixExploration(Player* student)
 	slowPrint("The Surprise Quiz was finally over.");
 	slowPrint("You still had some time before returning home.");
 
+
 	while (!explorationFinished)
 	{
 		if (currentLocation == 1)
