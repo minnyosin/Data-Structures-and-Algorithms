@@ -737,7 +737,7 @@ int surpriseQuizChallenge(Player* student)
 
 int groupAssignmentChallenge(Player* student)
 {
-	titleAscii();
+	groupassignmentAscii();
 	cout << endl;
 	slowPrint("You encountered a Group Assignment Crisis!");
 	Challenge* groupAssignment = new Challenge("Group Assignment Crisis", 110, 10, 6);

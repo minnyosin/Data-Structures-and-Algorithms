@@ -128,7 +128,7 @@ int playWeekSixToTwelve(Player* student)
 
 int main()
 {
-	finalexamAscii();
+	titleAscii();
 	slowPrint("Welcome to APU!");
 	slowPrint("You are challenged to finish the semester");
 
@@ -298,6 +298,7 @@ int main()
 		{
 			cout << endl;
 			slowPrint("You survived the mid sem period!");
+			cout << endl;
 
 			weekSixToTwelveFinished = true;
 		}
@@ -305,6 +306,7 @@ int main()
 		{
 			cout << endl;
 			slowPrint("You could not survive mid sem weeks.");
+			cout << endl;
 
 			if (askRetryCurrentWeek())
 			{
@@ -471,12 +473,18 @@ int main()
 			{
 				cout << endl;
 
+				slowPrint("Every late night, difficult choice, and moment you nearly gave up led to this.");
+				slowPrint("The semester tested you until the final second, but your hard work paid off.");
+
 				cout << endl;
 				cout << "================================" << endl;
 
 				cout << "       SEMESTER COMPLETED" << endl;
 
-				cout << "================================" << endl;
+				cout << "================================" << endl << endl;
+
+				slowPrint("Thanks for Playing <3");
+				
 
 				finalExamFinished = true;
 				semesterFinished = true;
