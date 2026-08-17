@@ -1,3 +1,7 @@
+// This Display.cpp file is 100% AI Generated.
+// This does not interfear with any of the logic that is implemented.
+// This is used just to make the display of the narrative fancy.
+
 #include "Display.h"
 #include <iostream>
 #include <windows.h>

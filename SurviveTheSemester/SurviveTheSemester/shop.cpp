@@ -66,7 +66,7 @@ void downtownShop(Player* student)
 	int option = 0;
 	while (option != 5)
 	{
-		cout << endl << "===== KLCC Pavillion =====" << endl << endl;
+		cout << endl << "===== KLCC Pavilion =====" << endl << endl;
 		cout << "Money : RM " << student->money << endl << endl;
 		cout << "1. Energy Drink - RM 8" << endl;
 		cout << "2. Study Notes - RM 12" <<" (Available: " << student->studyNotesAvailable << ")" << endl;

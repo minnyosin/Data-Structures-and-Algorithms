@@ -38,8 +38,8 @@ int weekTwoExploration(Player* student)
 	slowPrint("7:30 AM...");
 	slowPrint("Your alarm starts ringing.");
 
-	cout << endl;;
-	slowPrint("As soons as you wake up, you noticed that you have a class at 9:00 AM.");
+	cout << endl;
+	slowPrint("As soon as you wake up, you noticed that you have a class at 9:00 AM.");
 	slowPrint("However, you also think that going to school is boring and instead, you want to go to the KLCC.");
 
 	cout << endl;
@@ -62,7 +62,6 @@ int weekTwoExploration(Player* student)
 			apuAscii();
 			slowPrint("You decided to go to APU and tried to attend class regularly.");
 			slowPrint("You arrived before your class started.");
-			cout << endl;
 
 			currentLocation = 1;
 			firstLocationChosen = true;
@@ -72,8 +71,7 @@ int weekTwoExploration(Player* student)
 			cout << endl;
 			klccAscii();
 			slowPrint("You decided to go to KLCC.");
-			slowPrint("You will not be able to attend today's class");
-			cout << endl;
+			slowPrint("You will not be able to attend today's class.");
 
 			currentLocation = 2;
 			firstLocationChosen = true;
@@ -98,7 +96,6 @@ int weekTwoExploration(Player* student)
 					slowPrint("You have completely run out of energy!");
 					slowPrint("You cannot attend class or explore.");
 					slowPrint("You must use an item or return home.");
-					cout << endl;
 				}
 
 				cout << endl;
@@ -200,13 +197,13 @@ int weekTwoExploration(Player* student)
 					else if (randomEvent == 2)
 					{
 						moneyAscii();
-						slowPrint("You found RM 5 while you are walking around!");
+						slowPrint("You found RM 5 while walking around!");
 						student->receiveMoney(5);
 					}
 					else if (randomEvent == 3)
 					{
 						activityAscii();
-						slowPrint("You were attracted by the activites in level 3, central point.");
+						slowPrint("You were attracted by the activities in level 3, central point.");
 						slowPrint("You joined some activities and had some fun.");
 						student->motivation += 3;
 						student->energy -= 5;
@@ -284,6 +281,7 @@ int weekTwoExploration(Player* student)
 					if (!attendedClass)
 					{
 						homeAscii();
+						cout << endl;
 						slowPrint("You decided to go home without attending class.");
 
 						missedClass = true;
@@ -291,6 +289,7 @@ int weekTwoExploration(Player* student)
 					else
 					{
 						homeAscii();
+						cout << endl;
 						slowPrint("You decided to return home after class.");
 					}
 					slowPrint("You rested after returning home.");
@@ -316,7 +315,7 @@ int weekTwoExploration(Player* student)
 					slowPrint("You have completely run out of energy!");
 					slowPrint("You cannot work or explore Downtown.");
 					slowPrint("You must use an item or return home.");
-					cout << endl;
+
 				}
 
 				cout << endl;
@@ -388,7 +387,7 @@ int weekTwoExploration(Player* student)
 						"You received RM 15 for working for the first time!"
 					);
 					slowPrint(
-						"You will also receive RM 15 everytime you come to KLCC and decide to work, with the cost of your energy"
+						"You will also receive RM 15 every time you come to KLCC and decide to work, with the cost of your energy"
 					);
 
 
@@ -458,7 +457,7 @@ int weekTwoExploration(Player* student)
 						);
 					
 						slowPrint(
-							"They gave you RM5 as thanks."
+							"They gave you RM 5 as thanks."
 						);
 
 						student->receiveMoney(5);
@@ -536,6 +535,7 @@ int weekTwoExploration(Player* student)
 				case 6:
 					cout << endl;
 					homeAscii();
+					cout << endl;
 					slowPrint(
 						
 						"You decided to return home from Downtown."
@@ -613,7 +613,7 @@ int weekSixExploration(Player* student)
 
 				slowPrint("You must use an item or return home.");
 
-				cout << endl;
+
 			}
 
 			cout << endl;
@@ -706,7 +706,7 @@ int weekSixExploration(Player* student)
 				classmatesAscii();
 				slowPrint("You spoke with your classmates about the upcoming assignment.");
 
-				slowPrint("They gave you their information from seniors.");
+				slowPrint("They shared advice they had received from seniors.");
 
 				student->knowledge += 1;
 				student->motivation += 2;
@@ -747,6 +747,7 @@ int weekSixExploration(Player* student)
 			case 6:
 				cout << endl;
 				homeAscii();
+				cout << endl;
 				slowPrint("You decided to return home.");
 
 				slowPrint("You rested well after a long hard week.");
@@ -774,7 +775,6 @@ int weekSixExploration(Player* student)
 
 				slowPrint("You must use an item or return home.");
 
-				cout << endl;
 			}
 
 			cout << endl;
@@ -828,7 +828,7 @@ int weekSixExploration(Player* student)
 				cout << endl;
 				slowPrint("You worked at your part-time job.");
 
-				slowPrint("You received RM15, but the work made you tired.");
+				slowPrint("You received RM 15, but the work made you tired.");
 
 				cout << endl;
 
@@ -878,7 +878,7 @@ int weekSixExploration(Player* student)
 				gamingAscii();
 				slowPrint("You decided to visit the Gaming Cafe.");
 
-				slowPrint("Playing games costs RM8.");
+				slowPrint("Playing games costs RM 8.");
 
 				if (student->spendMoney(8))
 				{
@@ -917,6 +917,7 @@ int weekSixExploration(Player* student)
 			case 6:
 				cout << endl;
 				homeAscii();
+				cout << endl;
 				slowPrint("You decided to return home from KLCC.");
 
 				slowPrint("You rested well after a long hard week.");
@@ -985,7 +986,6 @@ int weekThirteenExploration(Player* student)
 
 				slowPrint("You must use an item or return home.");
 
-				cout << endl;
 			}
 
 			cout << endl;
@@ -1118,6 +1118,7 @@ int weekThirteenExploration(Player* student)
 			case 6:
 				cout << endl;
 				homeAscii();
+				cout << endl;
 				slowPrint("You decided to return home.");
 
 				slowPrint("You rested well for this week");
@@ -1145,7 +1146,6 @@ int weekThirteenExploration(Player* student)
 
 				slowPrint("You must use an item or return home.");
 
-				cout << endl;
 			}
 
 			cout << endl;
@@ -1201,7 +1201,7 @@ int weekThirteenExploration(Player* student)
 				cafeAscii();
 				slowPrint("You worked at your part-time job.");
 
-				slowPrint("You received RM15, but the work made you tired.");
+				slowPrint("You received RM 15, but the work made you tired.");
 
 				cout << endl;
 
@@ -1252,7 +1252,7 @@ int weekThirteenExploration(Player* student)
 				cinemaAscii();
 				slowPrint("You decided to watch a movie.");
 
-				slowPrint("Watching movie costs RM10.");
+				slowPrint("Watching movie costs RM 10.");
 
 				if (student->spendMoney(10))
 				{
@@ -1292,6 +1292,7 @@ int weekThirteenExploration(Player* student)
 			case 6:
 				cout << endl;
 				homeAscii();
+				cout << endl;
 				slowPrint("You decided to return home from KLCC.");
 
 				slowPrint("You rested well for this week.");

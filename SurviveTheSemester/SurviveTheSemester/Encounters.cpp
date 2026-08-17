@@ -24,6 +24,7 @@ int randomLuckCheck()
 
 int phoneDistractionChallenge(Player* student)
 {
+	cout << endl;
 	phoneAscii();
 	slowPrint("You encountered a Phone Distraction!");
 	cout << endl;
@@ -121,14 +122,13 @@ int phoneDistractionChallenge(Player* student)
 			phoneDistraction->displayChallengeStats();
 			delete phoneDistraction;
 			return 1;
-			break;
 		}
 
 		if (!isYourTurn)
 		{
 			slowPrint("But later...");
 			cout << endl;
-			slowPrint("Phone start distracting you!");
+			slowPrint("Your phone starts distracting you!");
 			cout << endl;
 			int randomAttack = randomEnemyAttack();
 
@@ -160,7 +160,7 @@ int phoneDistractionChallenge(Player* student)
 		if (phoneDistraction->isTimeout())
 		{
 
-			slowPrint("You ran out of time, it is already bed time!");
+			slowPrint("You ran out of time, it is already bedtime!");
 			slowPrint("You could not beat your phone's distraction :(");
 			cout << endl;
 			student->motivation -= 2;
@@ -641,7 +641,6 @@ int surpriseQuizChallenge(Player* student)
 
 		if (!isYourTurn)
 		{
-			cout << endl;
 			slowPrint("But suddenly...");
 			cout << endl;
 
@@ -656,7 +655,7 @@ int surpriseQuizChallenge(Player* student)
 			}
 			else if (randomAttack == 2)
 			{
-				slowPrint("Another student disturb you by keep asking for answers");
+				slowPrint("Another student kept disturbing you by asking for answers");
 				slowPrint("The lecturer noticed that and warned both of you!");
 
 				student->motivation -= 2;
@@ -1146,7 +1145,7 @@ int procrastinationChallenge(Player* student)
 			cout << endl;
 			slowPrint("You decided to revise an important topic.");
 			slowPrint("The topic was difficult, but you slowly understood it.");
-			slowPrint("You gained some knowledge with the cost of your energy.");
+			slowPrint("You gained some knowledge at the cost of your energy.");
 
 			cout << endl;
 
@@ -1249,7 +1248,6 @@ int procrastinationChallenge(Player* student)
 
 		if (!isYourTurn)
 		{
-			cout << endl;
 			slowPrint("But later...");
 			cout << endl;
 
@@ -1631,7 +1629,6 @@ int finalExamChallenge(Player* student)
 
 		if (!isYourTurn)
 		{
-			cout << endl;
 			slowPrint("But suddenly...");
 			cout << endl;
 

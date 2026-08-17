@@ -80,7 +80,7 @@ int playWeekSixToTwelve(Player* student)
 	cout << endl;
 
 	slowPrint("You arrived at APU expecting a normal class.");
-	slowPrint("However, the lecturer surprised you with surprise quiz!");
+	slowPrint("However, the lecturer surprised you with a surprise quiz!");
 
 	int quizResult = surpriseQuizChallenge(student);
 
@@ -478,9 +478,7 @@ int main()
 
 				cout << endl;
 				cout << "================================" << endl;
-
 				cout << "       SEMESTER COMPLETED" << endl;
-
 				cout << "================================" << endl << endl;
 
 				slowPrint("Thanks for Playing <3");

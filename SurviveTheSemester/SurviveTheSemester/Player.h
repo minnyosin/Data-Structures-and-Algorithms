@@ -154,7 +154,7 @@ public:
 			return;
 		}
 		money += amount;
-		cout << "You received RM" << amount << "!" << endl;
+		cout << "You received RM " << amount << "!" << endl;
 	}
 	bool useItem(int index)
 	{
@@ -218,7 +218,7 @@ public:
 		{
 			cout << endl;
 			slowPrint("You completely lost your Focus :(");
-			slowPrint("You decided to drop out the Course");
+			slowPrint("You decided to drop out of the Course");
 			slowPrint("You failed the challenge...");
 			cout << endl;
 			return true;
@@ -236,7 +236,7 @@ inline string setName()
 	while (!isNameCorrect)
 	{
 		name.clear();
-		cout << "Enter your name:";
+		cout << "Enter your name: ";
 		getline(cin, name);
 		
 		isNameCorrect = name.find_first_not_of(" \t\r\n") != string::npos;

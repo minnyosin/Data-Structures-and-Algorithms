@@ -33,7 +33,7 @@ public:
 	void displayCombatStats()
 	{
 		cout << "Level : " << challengeLevel << endl;
-		cout << "Time :" << challengeTime << endl;
+		cout << "Time : " << challengeTime << endl;
 	}
 	ChallengeStats tempStat()
 	{
