@@ -59,7 +59,7 @@ int weekTwoExploration(Player* student)
 		{
 		case 1:
 			cout << endl;
-			apu();
+			apuAscii();
 			slowPrint("You decided to go to APU and tried to attend class regularly.");
 			slowPrint("You arrived before your class started.");
 			cout << endl;
@@ -70,7 +70,7 @@ int weekTwoExploration(Player* student)
 
 		case 2:
 			cout << endl;
-			klcc();
+			klccAscii();
 			slowPrint("You decided to go to KLCC.");
 			slowPrint("You will not be able to attend today's class");
 			cout << endl;
@@ -190,7 +190,7 @@ int weekTwoExploration(Player* student)
 					int randomEvent = randomExplorationEvent();
 					if (randomEvent == 1)
 					{
-						senior();
+						seniorAscii();
 						slowPrint("You met a helpful senior student.");
 						slowPrint("The senior helped you understand your assignment.");
 						student->knowledge += 2;
@@ -199,13 +199,13 @@ int weekTwoExploration(Player* student)
 					}
 					else if (randomEvent == 2)
 					{
-						money();
+						moneyAscii();
 						slowPrint("You found RM 5 while you are walking around!");
 						student->receiveMoney(5);
 					}
 					else if (randomEvent == 3)
 					{
-						activity();
+						activityAscii();
 						slowPrint("You were attracted by the activites in level 3, central point.");
 						slowPrint("You joined some activities and had some fun.");
 						student->motivation += 3;
@@ -213,7 +213,7 @@ int weekTwoExploration(Player* student)
 					}
 					else
 					{
-						elevator();
+						elevatorAscii();
 						slowPrint("You entered the elevator during peak hour.");
 						slowPrint("It stopped at almost every floor before reaching your destination.");
 						slowPrint("You lost some energy and patience.");
@@ -237,7 +237,7 @@ int weekTwoExploration(Player* student)
 				case 3:
 				{
 					cout << endl;
-					shop();
+					shopAscii();
 					slowPrint("You decided to visit the Bila Bila");
 					cout << endl;
 
@@ -256,12 +256,12 @@ int weekTwoExploration(Player* student)
 					cout << endl;
 					if (!attendedClass && missedClass)
 					{
-						klcc();
+						klccAscii();
 						slowPrint("You took the Train to KLCC.");
 					}
 					else if (!attendedClass)
 					{
-						klcc();
+						klccAscii();
 						slowPrint("You left APU before attending your class.");
 						slowPrint("You will not be able to attend it later.");
 						slowPrint("You took the Train to KLCC.");
@@ -269,7 +269,7 @@ int weekTwoExploration(Player* student)
 					}
 					else
 					{
-						klcc();
+						klccAscii();
 						slowPrint("You took the Train to KLCC.");
 					}
 					
@@ -283,14 +283,14 @@ int weekTwoExploration(Player* student)
 					cout << endl;
 					if (!attendedClass)
 					{
-						home();
+						homeAscii();
 						slowPrint("You decided to go home without attending class.");
 
 						missedClass = true;
 					}
 					else
 					{
-						home();
+						homeAscii();
 						slowPrint("You decided to return home after class.");
 					}
 					slowPrint("You rested after returning home.");
@@ -342,7 +342,7 @@ int weekTwoExploration(Player* student)
 				{
 				case 1:
 				{
-					store();
+					storeAscii();
 					cout << endl;
 					slowPrint(
 						
@@ -376,7 +376,7 @@ int weekTwoExploration(Player* student)
 					}
 
 					cout << endl;
-					cafe();
+					cafeAscii();
 					slowPrint(
 						"You found a cafe looking for part-time workers."
 					);
@@ -439,7 +439,7 @@ int weekTwoExploration(Player* student)
 
 					if (randomEvent == 1)
 					{
-						street();
+						streetAscii();
 						slowPrint(
 							"You found a street performer."
 						);
@@ -452,7 +452,7 @@ int weekTwoExploration(Player* student)
 					}
 					else if (randomEvent == 2)
 					{
-						bag();
+						bagAscii();
 						slowPrint(
 							"You helped someone carry their shopping bags."
 						);
@@ -466,7 +466,7 @@ int weekTwoExploration(Player* student)
 					}
 					else if (randomEvent == 3)
 					{
-						lost();
+						lostAscii();
 						slowPrint(
 							"You became lost while exploring Downtown."
 						);
@@ -480,7 +480,7 @@ int weekTwoExploration(Player* student)
 					}
 					else
 					{
-						classmate();
+						classmateAscii();
 						slowPrint(
 							"You met one of your classmates."
 						);
@@ -513,7 +513,7 @@ int weekTwoExploration(Player* student)
 				case 5:
 				{
 					cout << endl;
-					apu();
+					apuAscii();
 					slowPrint(
 						
 						"You decided to travel to APU."
@@ -535,7 +535,7 @@ int weekTwoExploration(Player* student)
 				}
 				case 6:
 					cout << endl;
-					home();
+					homeAscii();
 					slowPrint(
 						
 						"You decided to return home from Downtown."
@@ -660,7 +660,7 @@ int weekSixExploration(Player* student)
 				}
 
 				cout << endl;
-				library();
+				libraryAscii();
 				slowPrint("You decided to study at the library.");
 
 				slowPrint("Even though the lecturer has not officially announced the assignment,");
@@ -702,6 +702,7 @@ int weekSixExploration(Player* student)
 				}
 
 				cout << endl;
+				classmatesAscii();
 				slowPrint("You spoke with your classmates about the upcoming assignment.");
 
 				slowPrint("They gave you their information from seniors.");
@@ -721,7 +722,7 @@ int weekSixExploration(Player* student)
 
 			case 3:
 				cout << endl;
-				shop();
+				shopAscii();
 				slowPrint("You decided to visit the APU Bila Bila.");
 
 				cout << endl;
@@ -736,7 +737,7 @@ int weekSixExploration(Player* student)
 
 			case 5:
 				cout << endl;
-				klcc();
+				klccAscii();
 				slowPrint("You decided to travel to KLCC.");
 
 				currentLocation = 2;
@@ -744,7 +745,7 @@ int weekSixExploration(Player* student)
 
 			case 6:
 				cout << endl;
-				home();
+				homeAscii();
 				slowPrint("You decided to return home.");
 
 				slowPrint("You rested well after a long hard week.");
@@ -845,7 +846,7 @@ int weekSixExploration(Player* student)
 
 			case 2:
 				cout << endl;
-				store();
+				storeAscii();
 				slowPrint("You decided to visit the Downtown Store.");
 
 				cout << endl;
@@ -873,7 +874,7 @@ int weekSixExploration(Player* student)
 				}
 
 				cout << endl;
-				cafe();
+				gamingAscii();
 				slowPrint("You decided to visit the Gaming Cafe.");
 
 				slowPrint("Playing games costs RM8.");
@@ -906,7 +907,7 @@ int weekSixExploration(Player* student)
 
 			case 5:
 				cout << endl;
-				apu();
+				apuAscii();
 				slowPrint("You decided to return to APU.");
 
 				currentLocation = 1;
@@ -914,7 +915,7 @@ int weekSixExploration(Player* student)
 
 			case 6:
 				cout << endl;
-				home();
+				homeAscii();
 				slowPrint("You decided to return home from KLCC.");
 
 				slowPrint("You rested well after a long hard week.");
@@ -1031,7 +1032,7 @@ int weekThirteenExploration(Player* student)
 				}
 
 				cout << endl;
-				library();
+				libraryAscii();
 				slowPrint("You decided to study at the library.");
 
 				slowPrint("You started preparing for the final exam.");
@@ -1071,6 +1072,7 @@ int weekThirteenExploration(Player* student)
 				}
 
 				cout << endl;
+				classmatesAscii();
 				slowPrint("You studied together with your classmates for the final exam.");
 
 				slowPrint("They explained you the topics that you don't understand.");
@@ -1090,7 +1092,7 @@ int weekThirteenExploration(Player* student)
 
 			case 3:
 				cout << endl;
-				shop();
+				shopAscii();
 				
 				slowPrint("You decided to visit the APU Bila Bila.");
 
@@ -1106,7 +1108,7 @@ int weekThirteenExploration(Player* student)
 
 			case 5:
 				cout << endl;
-				klcc();
+				klccAscii();
 				slowPrint("You decided to travel to KLCC.");
 
 				currentLocation = 2;
@@ -1114,7 +1116,7 @@ int weekThirteenExploration(Player* student)
 
 			case 6:
 				cout << endl;
-				home();
+				homeAscii();
 				slowPrint("You decided to return home.");
 
 				slowPrint("You rested well for this week");
@@ -1195,7 +1197,7 @@ int weekThirteenExploration(Player* student)
 				}
 
 				cout << endl;
-				cafe();
+				cafeAscii();
 				slowPrint("You worked at your part-time job.");
 
 				slowPrint("You received RM15, but the work made you tired.");
@@ -1217,7 +1219,7 @@ int weekThirteenExploration(Player* student)
 
 			case 2:
 				cout << endl;
-				store();
+				storeAscii();
 				slowPrint("You decided to visit the Downtown Store.");
 
 				cout << endl;
@@ -1246,7 +1248,7 @@ int weekThirteenExploration(Player* student)
 				}
 
 				cout << endl;
-				cinema();
+				cinemaAscii();
 				slowPrint("You decided to watch a movie.");
 
 				slowPrint("Watching movie costs RM10.");
@@ -1280,7 +1282,7 @@ int weekThirteenExploration(Player* student)
 
 			case 5:
 				cout << endl;
-				apu();
+				apuAscii();
 				slowPrint("You decided to return to APU.");
 
 				currentLocation = 1;
@@ -1288,7 +1290,7 @@ int weekThirteenExploration(Player* student)
 
 			case 6:
 				cout << endl;
-				home();
+				homeAscii();
 				slowPrint("You decided to return home from KLCC.");
 
 				slowPrint("You rested well for this week.");
