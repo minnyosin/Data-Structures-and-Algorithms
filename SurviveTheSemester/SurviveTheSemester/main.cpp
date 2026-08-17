@@ -128,7 +128,7 @@ int playWeekSixToTwelve(Player* student)
 
 int main()
 {
-	title();
+	finalexamAscii();
 	slowPrint("Welcome to APU!");
 	slowPrint("You are challenged to finish the semester");
 

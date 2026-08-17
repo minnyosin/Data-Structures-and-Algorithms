@@ -24,7 +24,7 @@ int randomLuckCheck()
 
 int phoneDistractionChallenge(Player* student)
 {
-	phone();
+	phoneAscii();
 	slowPrint("You encountered a Phone Distraction!");
 	cout << endl;
 
@@ -204,7 +204,7 @@ int phoneDistractionChallenge(Player* student)
 
 int attendingClassEncounter(Player* student)
 {
-	classroom();
+	classroomAscii();
 	cout << endl;
 	slowPrint("You decided to attend your class!");
 	cout << endl;
@@ -474,7 +474,7 @@ int attendingClassEncounter(Player* student)
 
 int surpriseQuizChallenge(Player* student)
 {
-	test();
+	testAscii();
 	cout << endl;
 	slowPrint("You encountered a Surprise Quiz!");
 	cout << endl;
@@ -737,7 +737,7 @@ int surpriseQuizChallenge(Player* student)
 
 int groupAssignmentChallenge(Player* student)
 {
-	groupassignment();
+	titleAscii();
 	cout << endl;
 	slowPrint("You encountered a Group Assignment Crisis!");
 	Challenge* groupAssignment = new Challenge("Group Assignment Crisis", 110, 10, 6);
@@ -1353,6 +1353,7 @@ int procrastinationChallenge(Player* student)
 }
 int finalExamChallenge(Player* student)
 {
+
 	cout << endl;
 	cout << "===== WEEK 15 =====" << endl;
 	cout << endl;
